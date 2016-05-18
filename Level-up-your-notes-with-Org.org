@@ -1,0 +1,1302 @@
+#+Title: Level up your notes with Org
+#+Author: Nick Anderson
+#+Email: nick@cmdln.org
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+# The TOC is a bit much for a slide show IMHO, but maybe you want it when exporting to html
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+# Available Transitions: default|cube|page|concave|zoom|linear|fade|none.
+#+REVEAL_TRANS: fade
+#+REVEAL_THEME: night
+# This flattens up to x levels deep
+#+REVEAL_HLEVEL: 1
+#+REVEAL_HEAD_PREAMBLE: <meta name=description" content=CFEngine Zero to Hero Primer.">
+#+REVEAL_POSTAMBLE: <p> Created by Nick Anderson. </p>
+#+REVEAL_PLUGINS: (markdown notes)
+#+REVEAL_EXTRA_CSS: ./local.css
+
+# If exporting to html consider adjusting the TOC setting above
+#+SETUPFILE: ~/src/org-html-themes/setup/theme-readtheorg.setup
+
+* Introduction
+:PROPERTIES:
+:ID:       ed80d66f-ab63-4251-9a0e-4df829a6c13c
+:END:
+#+BEGIN_QUOTE
+Org mode is for keeping notes, maintaining TODO lists, planning projects and
+authoring documents with a fast and effective plain text system. --
+http://orgmode.org/
+#+END_QUOTE
+
+* Getting started with Spacemacs
+:PROPERTIES:
+:ID:       7c5bc67e-ec60-4085-b5e9-9d1a4b061188
+:END:
+
+#+BEGIN_QUOTE
+Spacemacs is a "community-driven Emacs distribution".
+
+"The best editor is neither Emacs nor Vim, it's Emacs *and* Vim!".
+
+-- spacemacs.org
+#+END_QUOTE
+
+#+BEGIN_NOTES
+I think spacemacs is the easiest way to get started
+#+END_NOTES
+
+** Why Spacemacs?
+:PROPERTIES:
+:ID:       f3c82fbc-1bb6-456a-bfed-8fcc04dd8449
+:END:
+
+- As a *vim* user I can easily use Emacs.
+- Managing configs is much easier.
+- *You* don't have to use vim key bindings.
+
+** Backup
+:PROPERTIES:
+:ID:       4ef15512-a4c1-4ef8-b148-b8d5a5a4b102
+:END:
+
+First backup your existing Emacs config if you have one.
+
+#+BEGIN_SRC sh
+  mkdir ~/emacs_backup
+  mv ~/init.el ~/emacs_backup/
+  mv .emacs.d ~/emacs_backup/
+#+END_SRC
+
+** Install
+:PROPERTIES:
+:ID:       2dba716c-e2c1-44b9-84da-ca66dec2a3c0
+:END:
+
+Then install spacemacs (I assume you already have Emacs installed).
+
+#+BEGIN_SRC sh
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+#+END_SRC
+
+* Configuring Spacemacs for Org
+:PROPERTIES:
+:ID:       9b81b83b-a3ad-463d-a6a2-eaa991cf3eb0
+:END:
+
+** =~/.spacemacs=
+:PROPERTIES:
+:ID:       9df0bbde-2a84-4da1-9178-539ab4695cfd
+:END:
+
+- Generate one with defaults
+
+  #+BEGIN_EXAMPLE
+    <SPC> : dotspacemacs/install RET
+  #+END_EXAMPLE
+
+- To open the installed dotfile:
+
+  #+BEGIN_EXAMPLE
+  <SPC> f e d
+  #+END_EXAMPLE
+
+*Note:* The =.spacemacs= used for this presentation is documented at the end of
+ the presentation. You may want to refer to the tangled [[./dot-spacemacs][=dot-spacemacs=]].
+
+** Layers
+:PROPERTIES:
+:ID:       52af43c9-6532-43ad-929a-204136c03f70
+:END:
+
+- Self contained units of configuration
+
+** Enable org layer
+:PROPERTIES:
+:ID:       24b385cb-7a6c-44cc-ab67-acf0f516461f
+:END:
+
+Enable the =org= layer in =dotspacemacs/layers=.
+
+#+BEGIN_SRC elisp
+(defun dotspacemacs/layers ()
+  "Configuration Layers declaration.
+You should not put any user code in this function besides modifying the variable
+values."
+  (setq-default
+   dotspacemacs-configuration-layers '( org )))
+#+END_SRC
+
+#+BEGIN_NOTES
+After editing the config, close and restart Emacs to install the layer.
+#+END_NOTES
+
+** Agenda files
+:PROPERTIES:
+:ID:       918f19f2-dd9d-4792-9575-42123a17d3a3
+:END:
+
+*TODO* items, *time-stamped* items, and *tagged headlines* can be scattered
+throughout a file or even a number of files. [[https://www.gnu.org/software/emacs/manual/html_node/org/Agenda-Views.html#Agenda-Views][Agenda views]] allow Org to select
+entries based on various criteria for display in a separate buffer.
+
+Tell org where you keep your notes. Make sure this presentation is included!
+
+#+BEGIN_SRC elisp
+    ;; Set the org-agenda files
+    ;; Subdirectories must be explicitly specified.
+    (setq org-agenda-files
+      '("~/org" "~/src/presentations/Level-up-your-notes-with-Org"))
+#+END_SRC
+
+#+BEGIN_NOTES
+  The agenda is neat, though I admit I have not trained myself to live in it yet.
+  It allows you to search and display items throughout your org files. You can
+  even interact with things directly from agenda views.
+
+  - an agenda that is like a calendar and shows information for specific dates
+  - a TODO list that covers all unfinished action items,
+  - a match view, showings headlines based on the tags, properties, and TODO
+    state associated with them,
+  - a timeline view that shows all events in a single Org file, in time-sorted
+    view,
+  - a text search view that shows all entries from multiple files that contain
+    specified keywords,
+  - a stuck projects view showing projects that currently don’t move along, and
+  - custom views that are special searches and combinations of different views.
+#+END_NOTES
+
+* Using Org mode in Spacemacs
+:PROPERTIES:
+:ID:       b6cc044c-384f-4cde-8de8-991f1232e135
+:END:
+** Make a new entry
+:PROPERTIES:
+:ID:       7d103e08-0d1f-40e3-8157-924cc5437660
+:END:
+
+In Org each entry is simply a line starting with one or more =*=. To insert a
+new headline after the current one type =<comma> h i=.
+** Capture a new TODO (or other standard type of entry)
+:PROPERTIES:
+:ID:       d686855a-e312-45e8-b9ce-7019020079fc
+:END:
+
+Capture templates make capturing new entries quick and easy.
+
+*Note:* The configuration used for this presentation allows you to capture a new
+TODO by typing =<comma> c t=.
+
+#+BEGIN_NOTES
+I have played with various capture templates for meeting notes, todos and other
+kinds of tasks. Except for TODOs none of the other capture templates I have
+tried have stuck for me, but I keep experimenting.
+#+END_NOTES
+
+** Tag entries for search                                           :findme:
+:PROPERTIES:
+:ID:       86a5ba5e-437a-4ee8-b85b-a7722dd84ca8
+:END:
+
+You can tag headlines so that they are easy to find later. With the insertion
+point on a header type =<comma> := to tag the entry.
+
+- Separate tags with =:=
+- Spaces aren't allowed
+
+** Agenda views
+:PROPERTIES:
+:ID:       ca5424ad-4560-4d4b-a0cb-8ae8081574e8
+:END:
+
+From an org file:
+- =<comma> a=
+
+From anywhere in Spacemacs:
+- =SPC a o o=
+
+** Searching for entries
+:PROPERTIES:
+:ID:       b761c6f2-e0b5-4847-b56d-ca65adedf182
+:END:
+
+** CLI Tools
+:PROPERTIES:
+:ID:       14a6a197-fd02-4ef7-b44d-c161f7828513
+:END:
+
+Since this is all just plain text, you can use your favorite command line
+utilities like [[http://geoff.greer.fm/ag/][=ag=]], [[http://beyondgrep.com][=ack=]] or =grep=.
+
+** Agenda Searches
+:PROPERTIES:
+:ID:       987a1069-b64c-4dfd-bd8b-5ee7666fa6db
+:END:
+
+- Search for entries tagged with =findme=
+
+  From within an org file type =<comma> a m= and type findme.
+** Stay focused
+:PROPERTIES:
+:ID:       64e115d7-2237-4d4a-81a3-22a242fb936e
+:END:
+
+This is a good way to keep from being distracted. 
+
+- =org-narrow-to-subtree= =<comma> n=
+- =widen= =<comma> N=
+** Clocking Time
+:PROPERTIES:
+:ID:       f9696030-c847-4320-897f-829b35b4216d
+:END:
+:LOGBOOK:
+CLOCK: [2016-05-18 Wed 15:35]--[2016-05-18 Wed 15:47] =>  0:12
+:END:
+- =org-clock-in= =<comma> I=
+- =org-clock-out= =<comma> O=
+
+*Note:* Try typing =: org-clock-report=
+
+* Org Markup
+:PROPERTIES:
+:ID:       4a24bcf1-9ed3-4e34-9454-f64d624fe3e5
+:END:
+
+Org has its own markup syntax which is *really* beneficial for exporting.
+
+- Markup your text, you will thank me later
+- This is *key to getting compliments*
+ 
+#+BEGIN_NOTES
+Really, spend the time to mark up the text.
+#+END_NOTES
+
+** Emphasis and monospace
+:PROPERTIES:
+:ID:       1e18590d-b9ac-4e80-8ffd-899df3c990ca
+:END:
+
+#+BEGIN_SRC text
+You can make words *bold*, /italic/, _underlined_, =verbatim= and ~code~, and,
+if you must, '+strike-through+'. Text in the code and verbatim string is not
+processed for Org mode specific syntax, it is exported verbatim.
+#+END_SRC
+
+You can make words *bold*, /italic/, _underlined_, =verbatim= and ~code~, and,
+if you must, '+strike-through+'. Text in the code and verbatim string is not
+processed for Org mode specific syntax, it is exported verbatim.
+
+*Note:* If you can't remember the markup you can access these formatting options
+by typing =<comma> x=. Try doing this after highlighting a word.
+
+#+BEGIN_NOTES
+=verbatim= and ~code~ are especially useful for technical notes that include
+commands.
+#+END_NOTES
+
+** Block quotes
+:PROPERTIES:
+:ID:       351fd26b-1678-4c15-b3c5-30b162eb5efe
+:END:
+
+#+BEGIN_EXAMPLE
+#+BEGIN_QUOTE
+Clever remark -- me
+#+END_QUOTE
+#+END_EXAMPLE
+
+#+BEGIN_QUOTE
+Clever remark -- me
+#+END_QUOTE
+
+*Note:* Try typing =<q= followed by the =<TAB>= key.
+
+** Example blocks
+:PROPERTIES:
+:ID:       dbdc48d2-efa9-4f6d-aaa7-df239cdd10a1
+:END:
+
+#+BEGIN_SRC text
+#+BEGIN_EXAMPLE
+Are useful for rendering mutlilne blocks verbatim.
+#+END_EXAMPLE
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+Are useful for rendering mutlilne blocks verbatim.
+#+END_EXAMPLE
+
+*Note:* Try typing =<e= followed by the =<TAB>= key.
+
+** Code blocks
+:PROPERTIES:
+:ID:       3243b395-eede-4a52-9bcc-6b71e2c0e258
+:END:
+
+Source code can be included in Org mode documents using a 'src' block.
+
+#+BEGIN_EXAMPLE
+#+BEGIN_SRC cfengine3
+bundle agent main {
+  reports: "Hello World!";
+}
+#+END_SRC
+#+END_EXAMPLE
+
+They render nicely when exported
+
+#+BEGIN_SRC cfengine3
+bundle agent main {
+  reports: "Hello World!";
+}
+#+END_SRC
+
+*Note:* Try typing =<s= followed by the =<TAB>= key. Many languages are supported.
+
+** Links
+:PROPERTIES:
+:ID:       2b7d654a-6b48-4d5f-8994-71e29582cb78
+:END:
+
+You can link to [[Emphasis and monospace][other nodes in a document]] or to [[http://lmgtfy.com][external places]].
+
+#+BEGIN_EXAMPLE
+You can link to [[Emphasis and monospace][other nodes in a document]] or to [[http://lmgtfy.com][external places]].
+#+END_EXAMPLE
+
+*=[[TARGET] [TEXT]]=*
+** Pictures
+:PROPERTIES:
+:ID:       e97062de-0f30-49d2-ad1e-b9d6d4d9e553
+:END:
+
+Worth a thousand words
+
+#+BEGIN_EXAMPLE
+[[./media/best-nyan-cat-gif-963.gif]]
+#+END_EXAMPLE
+
+[[./media/best-nyan-cat-gif-963.gif]]
+
+** Tables
+:PROPERTIES:
+:ID:       4cdfb986-b1db-434f-91bb-436b4ab8bd6c
+:END:
+
+#+BEGIN_EXAMPLE
+| Tables | Are     |
+|--------+---------|
+| easy   | to make |
+#+END_EXAMPLE
+
+| Tables | Are     |
+|--------+---------|
+| easy   | to make |
+
+* Different kinds of notes
+:PROPERTIES:
+:ID:       42ac72a9-78dc-49f9-a964-38dd7f056796
+:END:
+
+- Meeting minutes
+- TODOs
+- Random things to remember
+- *Technical notes*
+
+* Literate Devops (for technical notes)
+:PROPERTIES:
+:ID:       91c2d0be-6249-4bfc-8f23-bdc010bb3889
+:END:
+
+- [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Literate Devops]]
+- [[https://www.youtube.com/watch?v=dljNabciEGg][Literate Devops Demo]]
+
+#+BEGIN_NOTES
+I found this post by Howard Abrams a couple years ago (the way back machine
+actually indicates it appeared in the end of 2014).
+
+I continue to re-visit it from time to time as I try to stay inside org more.
+#+END_NOTES
+
+** Executable code blocks
+:PROPERTIES:
+:ID:       b1ab0af5-ad9a-43a4-9069-0db70cd51109
+:END:
+
+Some languages support executing code blocks. Try placing the insertion point
+within the code block and typing =<comma> <comma>=.
+
+#+BEGIN_EXAMPLE
+#+BEGIN_SRC sh :exports both :wrap EXAMPLE
+  /bin/echo "Hello $(date)"
+#+END_SRC
+#+END_EXAMPLE
+
+#+BEGIN_SRC sh :exports results :wrap EXAMPLE
+  /bin/echo "Hello $(date)"
+#+END_SRC
+
+Execution results can be exported.
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+Hello Tue May 17 16:48:07 CDT 2016
+#+END_EXAMPLE
+** Execute code blocks on remote hosts with Tramp
+:PROPERTIES:
+:ID:       163d5c10-1711-45fb-b7c1-00944b97e9a3
+:END:
+
+#+BEGIN_EXAMPLE
+#+BEGIN_SRC sh :exports both :wrap EXAMPLE :dir /ssh:user@example.host.tld:
+  hostname
+#+END_SRC
+#+END_EXAMPLE
+
+#+BEGIN_SRC sh :exports results :wrap EXAMPLE :dir /ssh:user@example.host.tld:
+  hostname
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+example.host.tld
+#+END_EXAMPLE
+* Getting Compliments
+:PROPERTIES:
+:ID:       d8b85004-65a3-4df4-9c4e-e594f75963bb
+:END:
+
+Comments like these are a regular occurrence.
+
+#+BEGIN_QUOTE
+  "I really love the reporting you use.  What is that?"
+  -- Todd Rix
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+  "Dammit, Nick!" -- Jimis
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+  "Impressive notes!" -- Thomas Ryd
+#+END_QUOTE
+
+** Exporting Notes
+:PROPERTIES:
+:ID:       6c40f13f-1f47-4450-94de-3ae63504ed7e
+:END:
+
+Exporting your notes makes *all* the difference.
+
+** Exporting to HTML 
+:PROPERTIES:
+:ID:       fb06919e-95f2-41f1-ae35-aedf3be98879
+:END:
+
+The default html export is not bad, but to really wow people with html exported
+versions of your notes check out [[https://github.com/fniessen/org-html-themes][org-html-themes]].
+
+I like readtheorg.
+
+#+BEGIN_EXAMPLE
+#+SETUPFILE: ~/src/org-html-themes/setup/theme-readtheorg.setup
+#+END_EXAMPLE
+
+** Exporting for Presentations
+:PROPERTIES:
+:ID:       1914078c-3482-49f0-9b01-617df0fc0d3c
+:END:
+
+I made this whole presentation in org-mode and I used the =ox-reveal= package to
+export it. This allows me to version my presentations like any other plain text
+source.
+** Narrow before exporting
+:PROPERTIES:
+:ID:       060cf0ac-b0bc-44cd-8d42-014a05ef4478
+:END:
+
+Narrowing before exporting can be useful so you share only a subset of notes.
+** Clocktables for the PHB
+:PROPERTIES:
+:ID:       042325cc-a327-4e62-a092-64303d5c47db
+:END:
+:LOGBOOK:
+CLOCK: [2016-05-18 Wed 15:45]--[2016-05-18 Wed 15:47] =>  0:02
+:END:
+
+If you are good about tracking your time and you have a PHB, checkout
+=: org-clock-report=.
+
+#+BEGIN: clocktable :maxlevel 2 :scope subtree
+#+CAPTION: Clock summary at [2016-05-18 Wed 15:47]
+| Headline                    | Time   |      |
+|-----------------------------+--------+------|
+| *Total time*                | *0:02* |      |
+|-----------------------------+--------+------|
+| \_  Clocktables for the PHB |        | 0:02 |
+#+END:
+
+* Summary Tips 
+:PROPERTIES:
+:ID:       cae8144c-44ec-475d-aa3a-bf7f213b1226
+:END:
+- Use org markup!
+- Start with one file
+- Keep it simple
+- Let it grow organically
+- Start recording the compliments you get right away!
+
+* Thanks!
+:PROPERTIES:
+:ID:       109918df-ec2a-47d6-a9a1-c80de9232d18
+:END:
+
+Happy Orging
+
+* TODO Deliver presentation at KLF2016
+SCHEDULED: <2016-05-21 Sat>
+:PROPERTIES:
+:ID:       4c4b5abb-810c-4961-9c12-9c9edccd6a22
+:END:
+
+* DONE Document =.spacemacs=
+CLOSED: [2016-05-18 Wed 14:27] SCHEDULED: <2016-05-18 Wed>
+:PROPERTIES:
+:ID:       8f22d7bf-12dd-435f-ba96-c968f9b5a52e
+:END:
+
+** =dotspacemacs/layers=
+:PROPERTIES:
+:ID:       b21ba2c2-4cd9-4c31-9030-3650080b60c7
+:END:
+
+*** Layers
+:PROPERTIES:
+:ID:       716faa0f-0d3c-4c7e-a33c-07e3b0939f98
+:END:
+
+These are the layers that are needed for this presentation. I have a cfengine
+snippet in the presentation, so I include that layer. But note it's in the
+=develop= branch of spacemacs still.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+;; -*- mode: emacs-lisp -*-
+;; This file is loaded by Spacemacs at startup.
+;; It must be stored in your home directory.
+
+(defun dotspacemacs/layers ()
+  "Configuration Layers declaration.
+You should not put any user code in this function besides modifying the variable
+values."
+  (setq-default
+   dotspacemacs-configuration-layers
+   '(
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+     ;; <M-m f e R> (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
+     cfengine
+     emacs-lisp
+     git
+     github
+     markdown
+     org
+     html
+     spell-checking
+     syntax-checking)
+#+END_SRC
+
+*** Additional Packages
+:PROPERTIES:
+:ID:       ca3563f3-a421-4917-a400-27f3079c5c21
+:END:
+
+The =ox-jira= package makes it easy to export into text marked up for Jira.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+   ;; List of additional packages that will be installed without being
+   ;; wrapped in a layer. If you need some configuration for these
+   ;; packages, then consider creating a layer. You can also put the
+   ;; configuration in `dotspacemacs/user-config'.
+   dotspacemacs-additional-packages '(ox-jira ox-reveal json-mode)
+#+END_SRC
+
+And that wraps up my =dotspacemacs/layers=
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+)
+;; End dotspacemacs/layers
+#+END_SRC
+
+** =dotspacemacs/init=
+:PROPERTIES:
+:ID:       5a4be116-8803-475c-bc85-f012057f30fb
+:END:
+
+I don't really mess with much in here.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+(defun dotspacemacs/init ()
+  "Initialization function.
+This function is called at the very startup of Spacemacs initialization
+before layers configuration.
+You should not put any user code in there besides modifying the variable
+values."
+  ;; This setq-default sexp is an exhaustive list of all the supported
+  ;; spacemacs settings.
+  (setq-default
+#+END_SRC
+
+*** Unchanged Spacemacs Defaults
+:PROPERTIES:
+:ID:       4df10774-eae1-474c-a979-cc8c4c8bfc92
+:END:
+
+These are spacemacs defaults that I left unchanged.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+   ;; If non nil ELPA repositories are contacted via HTTPS whenever it's
+   ;; possible. Set it to nil if you have no way to use HTTPS in your
+   ;; environment, otherwise it is strongly recommended to let it set to t.
+   ;; This variable has no effect if Emacs is launched with the parameter
+   ;; `--insecure' which forces the value of this variable to nil.
+   ;; (default t)
+   dotspacemacs-elpa-https t
+   ;; Maximum allowed time in seconds to contact an ELPA repository.
+   dotspacemacs-elpa-timeout 5
+   ;; If non nil then spacemacs will check for updates at startup
+   ;; when the current branch is not `develop'. (default t)
+   dotspacemacs-check-for-update t
+   ;; One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
+   ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
+   ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
+   ;; unchanged. (default 'vim)
+   dotspacemacs-editing-style 'vim
+   ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
+   dotspacemacs-verbose-loading nil
+   ;; Specify the startup banner. Default value is `official', it displays
+   ;; the official spacemacs logo. An integer value is the index of text
+   ;; banner, `random' chooses a random text banner in `core/banners'
+   ;; directory. A string value must be a path to an image format supported
+   ;; by your Emacs build.
+   ;; If the value is nil then no banner is displayed. (default 'official)
+   dotspacemacs-startup-banner 'official
+   ;; List of items to show in the startup buffer. If nil it is disabled.
+   ;; Possible values are: `recents' `bookmarks' `projects'.
+   ;; (default '(recents projects))
+   dotspacemacs-startup-lists '(recents projects)
+   ;; Number of recent files to show in the startup buffer. Ignored if
+   ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
+   dotspacemacs-startup-recent-list-size 5
+   ;; Default major mode of the scratch buffer (default `text-mode')
+   dotspacemacs-scratch-mode 'text-mode
+#+END_SRC
+
+*** Editing style
+:PROPERTIES:
+:ID:       d36d31e5-d1a4-40b2-8f95-4ea1b2d7a359
+:END:
+
+I didn't change the default here, but *Emacs users* might want to change the
+editing style.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+   ;; One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
+   ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
+   ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
+   ;; unchanged. (default 'vim)
+   dotspacemacs-editing-style 'vim
+#+END_SRC
+
+*** More Spacemacs defaults
+:PROPERTIES:
+:ID:       09bb3e9d-69b3-44dd-bb81-b435963187e5
+:END:
+
+These are some more spacemacs default values.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+   ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
+   dotspacemacs-verbose-loading nil
+   ;; Specify the startup banner. Default value is `official', it displays
+   ;; the official spacemacs logo. An integer value is the index of text
+   ;; banner, `random' chooses a random text banner in `core/banners'
+   ;; directory. A string value must be a path to an image format supported
+   ;; by your Emacs build.
+   ;; If the value is nil then no banner is displayed. (default 'official)
+   dotspacemacs-startup-banner 'official
+   ;; List of items to show in the startup buffer. If nil it is disabled.
+   ;; Possible values are: `recents' `bookmarks' `projects'.
+   ;; (default '(recents projects))
+   dotspacemacs-startup-lists '(recents projects)
+   ;; Number of recent files to show in the startup buffer. Ignored if
+   ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
+   dotspacemacs-startup-recent-list-size 5
+   ;; Default major mode of the scratch buffer (default `text-mode')
+   dotspacemacs-scratch-mode 'text-mode
+#+END_SRC
+
+*** Theme
+:PROPERTIES:
+:ID:       db955651-f33e-4c78-8210-f24fb382460c
+:END:
+
+I do prefer the dark solarized theme.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+   ;; List of themes, the first of the list is loaded when spacemacs starts.
+   ;; Press <SPC> T n to cycle to the next theme in the list (works great
+   ;; with 2 themes variants, one dark and one light)
+   dotspacemacs-themes '(
+                         solarized-dark
+                         spacemacs-dark
+                         spacemacs-light
+                         solarized-light
+                         leuven
+                         monokai
+                         zenburn)
+#+END_SRC
+
+*** Even more default spacemacs values
+:PROPERTIES:
+:ID:       557f434a-663e-40ed-85f4-b9aab744076b
+:END:
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+   ;; If non nil the cursor color matches the state color in GUI Emacs.
+   dotspacemacs-colorize-cursor-according-to-state t
+   ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
+   ;; size to make separators look not too crappy.
+   dotspacemacs-default-font '("Source Code Pro"
+                               :size 13
+                               :weight normal
+                               :width normal
+                               :powerline-scale 1.1)
+   ;; The leader key
+   dotspacemacs-leader-key "SPC"
+   ;; The leader key accessible in `emacs state' and `insert state'
+   ;; (default "M-m")
+   dotspacemacs-emacs-leader-key "M-m"
+   ;; Major mode leader key is a shortcut key which is the equivalent of
+   ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
+   dotspacemacs-major-mode-leader-key ","
+   ;; Major mode leader key accessible in `emacs state' and `insert state'.
+   ;; (default "C-M-m)
+   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   ;; These variables control whether separate commands are bound in the GUI to
+   ;; the key pairs C-i, TAB and C-m, RET.
+   ;; Setting it to a non-nil value, allows for separate commands under <C-i>
+   ;; and TAB or <C-m> and RET.
+   ;; In the terminal, these pairs are generally indistinguishable, so this only
+   ;; works in the GUI. (default nil)
+   dotspacemacs-distinguish-gui-tab nil
+   ;; (Not implemented) dotspacemacs-distinguish-gui-ret nil
+   ;; The command key used for Evil commands (ex-commands) and
+   ;; Emacs commands (M-x).
+   ;; By default the command key is `:' so ex-commands are executed like in Vim
+   ;; with `:' and Emacs commands are executed with `<leader> :'.
+   dotspacemacs-command-key ":"
+   ;; If non nil `Y' is remapped to `y$'. (default t)
+   dotspacemacs-remap-Y-to-y$ t
+   ;; Name of the default layout (default "Default")
+   dotspacemacs-default-layout-name "Default"
+   ;; If non nil the default layout name is displayed in the mode-line.
+   ;; (default nil)
+   dotspacemacs-display-default-layout nil
+   ;; If non nil then the last auto saved layouts are resume automatically upon
+   ;; start. (default nil)
+   dotspacemacs-auto-resume-layouts nil
+   ;; Location where to auto-save files. Possible values are `original' to
+   ;; auto-save the file in-place, `cache' to auto-save the file to another
+   ;; file stored in the cache directory and `nil' to disable auto-saving.
+   ;; (default 'cache)
+   dotspacemacs-auto-save-file-location 'cache
+   ;; Maximum number of rollback slots to keep in the cache. (default 5)
+   dotspacemacs-max-rollback-slots 5
+   ;; If non nil then `ido' replaces `helm' for some commands. For now only
+   ;; `find-files' (SPC f f), `find-spacemacs-file' (SPC f e s), and
+   ;; `find-contrib-file' (SPC f e c) are replaced. (default nil)
+   dotspacemacs-use-ido nil
+   ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
+   dotspacemacs-helm-resize nil
+   ;; if non nil, the helm header is hidden when there is only one source.
+   ;; (default nil)
+   dotspacemacs-helm-no-header nil
+   ;; define the position to display `helm', options are `bottom', `top',
+   ;; `left', or `right'. (default 'bottom)
+   dotspacemacs-helm-position 'bottom
+   ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
+   ;; several times cycle between the kill ring content. (default nil)
+   dotspacemacs-enable-paste-micro-state nil
+   ;; Which-key delay in seconds. The which-key buffer is the popup listing
+   ;; the commands bound to the current keystroke sequence. (default 0.4)
+   dotspacemacs-which-key-delay 0.4
+   ;; Which-key frame position. Possible values are `right', `bottom' and
+   ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
+   ;; right; if there is insufficient space it displays it at the bottom.
+   ;; (default 'bottom)
+   dotspacemacs-which-key-position 'bottom
+   ;; If non nil a progress bar is displayed when spacemacs is loading. This
+   ;; may increase the boot time on some systems and emacs builds, set it to
+   ;; nil to boost the loading time. (default t)
+   dotspacemacs-loading-progress-bar t
+   ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
+   ;; (Emacs 24.4+ only)
+   dotspacemacs-fullscreen-at-startup nil
+   ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
+   ;; Use to disable fullscreen animations in OSX. (default nil)
+   dotspacemacs-fullscreen-use-non-native nil
+   ;; If non nil the frame is maximized when Emacs starts up.
+   ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
+   ;; (default nil) (Emacs 24.4+ only)
+   dotspacemacs-maximized-at-startup nil
+   ;; A value from the range (0..100), in increasing opacity, which describes
+   ;; the transparency level of a frame when it's active or selected.
+   ;; Transparency can be toggled through `toggle-transparency'. (default 90)
+   dotspacemacs-active-transparency 90
+   ;; A value from the range (0..100), in increasing opacity, which describes
+   ;; the transparency level of a frame when it's inactive or deselected.
+   ;; Transparency can be toggled through `toggle-transparency'. (default 90)
+   dotspacemacs-inactive-transparency 90
+   ;; If non nil unicode symbols are displayed in the mode line. (default t)
+   dotspacemacs-mode-line-unicode-symbols t
+   ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
+   ;; scrolling overrides the default behavior of Emacs which recenters the
+   ;; point when it reaches the top or bottom of the screen. (default t)
+   dotspacemacs-smooth-scrolling t
+   ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
+   ;; derivatives. If set to `relative', also turns on relative line numbers.
+   ;; (default nil)
+   dotspacemacs-line-numbers nil
+   ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
+   ;; (default nil)
+   dotspacemacs-smartparens-strict-mode nil
+   ;; Select a scope to highlight delimiters. Possible values are `any',
+   ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
+   ;; emphasis the current one). (default 'all)
+   dotspacemacs-highlight-delimiters 'all
+   ;; If non nil advises quit functions to keep server open when quitting.
+   ;; (default nil)
+   dotspacemacs-persistent-server nil
+   ;; List of search tool executable names. Spacemacs uses the first installed
+   ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
+   ;; (default '("ag" "pt" "ack" "grep"))
+   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   ;; The default package repository used if no explicit repository has been
+   ;; specified with an installed package.
+   ;; Not used for now. (default nil)
+   dotspacemacs-default-package-repository nil
+#+END_SRC
+
+*** Whitespace Cleanup
+:PROPERTIES:
+:ID:       f94c8359-4a45-4ce4-ae2a-72d59197ecbb
+:END:
+
+I work with source code a lot and I like cleaning up the trailing whitespace
+automatically.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+   ;; Delete whitespace while saving buffer. Possible values are `all'
+   ;; to aggressively delete empty line and long sequences of whitespace,
+   ;; `trailing' to delete only the whitespace at end of lines, `changed'to
+   ;; delete only whitespace for changed lines or `nil' to disable cleanup.
+   ;; (default nil)
+   dotspacemacs-whitespace-cleanup 'trailing
+   ))
+#+END_SRC
+
+** =dotspacemacs/user-init=
+:PROPERTIES:
+:ID:       15e2ff52-d8a2-4a4c-8e8b-f6814546e32e
+:END:
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+(defun dotspacemacs/user-init ()
+  "Initialization function for user code.
+It is called immediately after `dotspacemacs/init'.  You are free to put almost
+any user code here.  The exception is org related code, which should be placed
+in `dotspacemacs/user-config'."
+  )
+#+END_SRC
+
+*** Function to add unique ID to each entry
+:PROPERTIES:
+:ID:       ed72b3c8-addd-4909-bc18-fc88318013cc
+:END:
+
+I have this function so that I can add a unique id to each entry in the file. It
+can be obnoxious but my property drawers are folded so its not that intrusive,
+and it does allow for linking to a nodes unique id so that links can remain
+working after re-filing entries into different files. Sometimes I have a save
+hook configured to run this.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+(defun my/org-add-ids-to-headlines-in-file ()
+  "Add ID properties to all headlines in the current file which
+   do not already have one."
+  (interactive)
+  (org-map-entries 'org-id-get-create))
+#+END_SRC
+
+And that wraps up my =dotspacemacs/user-init=.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+)
+;; End dotspacemacs/user-init
+#+END_SRC
+
+** =dotspacemacs/user-config=
+:PROPERTIES:
+:ID:       dcfd495c-a8fd-4597-965e-9f29b108d698
+:END:
+
+This is where I put the majority of my custom configuration.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+(defun dotspacemacs/user-config ()
+  "Configuration function for user code.
+This function is called at the very end of Spacemacs initialization after
+layers configuration. You are free to put any user code."
+#+END_SRC
+
+
+*** Pretty Bullets in org mode
+:PROPERTIES:
+:ID:       23332d3a-81f2-483f-b4c5-b1406dae0398
+:END:
+
+I like these prettier bullets that I [[https://github.com/syl20bnr/spacemacs/tree/master/layers/org#different-bullets][found]] in the org layer README.
+
+You should be able to set any utf-8 characters. If your looking for some options
+you might [[https://github.com/syl20bnr/spacemacs/tree/master/layers/org#different-bullets][try here]].
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; Prettier Bullets for org-mode
+  (setq org-bullets-bullet-list '("■" "◆" "▲" "▶"))
+#+END_SRC
+
+*** Fast TODO selection
+:PROPERTIES:
+:ID:       90cf59fc-7672-42bf-aff0-e675e46fcfab
+:END:
+
+This enables fast todo selection to bring up the menu of TODO keywords when
+pressing =t= on a headline.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  (setq org-use-fast-todo-selection t)
+#+END_SRC
+
+*** Configure TODO Keywords
+:PROPERTIES:
+:ID:       637860b4-2b22-430e-ab57-50e693e5ca2a
+:END:
+
+This sets up quick access to =TODO= states. I definitely use =TODO= and =DONE=
+but I haven't really found my flow with any other states so this gets messed
+with from time to time.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; TODO Keywords
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "IN_PROGRESS(i)" "|" "DONE(d)")
+                (sequence "WAITING(w@/)" "HOLD(h@/)" "|" "CANCELLED(c@/)"))))
+#+END_SRC
+
+You might like to have some fancy utf characters in the TODO keywords, but it
+could complicate manual editing (which probably should be avoided anyway).
+
+#+BEGIN_SRC elisp
+  ;; TODO Keywords
+  (setq org-todo-keywords
+        (quote ((sequence "☛ TODO(t)" "IN_PROGRESS(i)" "|" "✔ DONE(d)")
+                (sequence "⚑ WAITING(w@/)" "HOLD(h@/)" "|" "✘ CANCELLED(c@/)"))))
+#+END_SRC
+
+*** Enforce TODO dependencies
+:PROPERTIES:
+:ID:       237543af-c94f-48e4-9cc9-1a18813b2024
+:END:
+
+I have =TODO=s scattered all over the place. This prevents me from marking an
+entry as =DONE= when there are still sub entries that are not =DONE=.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; Avoid setting entries as DONE when there are still sub-entries that are not
+  ;; DONE.
+  (setq org-enforce-todo-dependencies t)
+#+END_SRC
+
+*** Capture Templates
+:PROPERTIES:
+:ID:       e013010a-f840-4249-a452-ec92a1e19ac9
+:END:
+
+I use the =To-do= capture all the time. All of the captured TODOs goto the same
+place and then I re-file them into other files later on. Note that I clock time
+during the capture and then automatically resume the previously clocked task
+when I am done capturing.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; Configure custom capture templates
+  (setq org-capture-templates
+      '(
+        ("t" "To-do" entry (file+headline "~/org/main.org" "Tasks")
+         "** TODO %^{Task Description}\nCreated From: %a\n" :clock-in t :clock-resume t :prepend t)))
+#+END_SRC
+
+*** Don't F-up my headline when pressing Alt-RETURN
+:PROPERTIES:
+:ID:       d93b3fe2-bcf4-4972-81db-de9b5af1171d
+:END:
+
+You can use alt-return when your on a heading to create a new one below it. If
+your in the middle of the heading, it chops it off and that is really annoying.
+
+Somewhere I stumbled on this setting in this guys [[https://github.com/roman/spacemacs-private-layer/blob/master/zoo/packages.el][private layer]]. There is some
+other good stuff in there too.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; When hitting alt-return on a header, please create a new one without
+  ;; messing up the one I'm standing on.
+  (setq org-insert-heading-respect-content t)
+#+END_SRC
+
+*** Don't let org clock time run amuck
+:PROPERTIES:
+:ID:       dc850dae-a43b-4718-ae99-87db4a602e48
+:END:
+
+I try to clock my time. I'm not great about doing it 100% of the time, but
+tracking my time is really useful. Clocktables can be really useful if your good
+about managing the clocked in task.
+
+With this setting after 30 minutes of idle time I am prompted to see if I want
+to keep or throw away the idle time. I think this really helps my clocking
+accuracy.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; Resolve open-clocks if idle more than 30 minutes
+  (setq org-clock-idle-time 30)
+#+END_SRC
+
+*** Hyperlink Abbreviations
+:PROPERTIES:
+:ID:       e49518d6-6749-466b-b297-2fd7eeb9184b
+:END:
+
+I link to several issue tracking systems frequently, and link abbreviations make
+it much nicer.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; Link abbreviations http://orgmode.org/manual/Link-abbreviations.html#Link-abbreviations
+  ;; This makes it easy to create links in org files to common urls
+  ;; Note: The actual link is not stored in the text, only when rendered
+  ;; Usage: [[zendesk:2753]] or [[redmine:7481][My text]]
+  (setq org-link-abbrev-alist
+        '(("zendesk" . "https://cfengine.zendesk.com/agent/tickets/")
+          ("redmine" . "https://dev.cfengine.com/issues/")
+          ("jira" . "https://tracker.mender.io/browse/")))
+#+END_SRC
+
+*** Rendering in-line images by default
+:PROPERTIES:
+:ID:       960c9549-dd3c-41d0-9bb1-97d562c659a2
+:END:
+
+I now do the majority of my writing in org-mode. Sometimes I include images.
+This makes them render in-line by default. I might switch this back off. It's
+nice but I have found it makes navigating documents more difficult when images
+are displayed inline.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ; Enable automatic inline image rendering
+  ; http://orgmode.org/manual/In_002dbuffer-settings.html
+  (setq org-startup-with-inline-images t)
+#+END_SRC
+
+*** Agenda Files
+:PROPERTIES:
+:ID:       2c254b06-0d0a-4d9e-a150-5a83a143c149
+:END:
+
+I consider myself quite unorganized. At least inside my head it feels that way.
+Org mode really helps me because it can search across multiple files. So I can
+have as many different files as I like for different projects or clients and
+then I can search across all of them for something using the agenda view. This
+specifies each of your org files, or the directories to be searched for org
+files.
+
+For this presentation I just point to the directory that contains my git clone.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; Set the org-agenda files
+  (setq org-agenda-files
+    '("~/src/presentations/Level-up-your-notes-with-Org"))
+#+END_SRC
+
+*** Refile Targets
+:PROPERTIES:
+:ID:       6a1d2468-00e4-40ce-97e6-bb4a8908588b
+:END:
+
+When I refile, I want to be able to go up to 5 levels deep. Probably I could
+take this down a notch or two. Usually I am only filing 1 or 2 levels deep.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; Set refile locations to whats in org-agenda
+  (setq org-refile-targets (quote ((org-agenda-files :maxlevel . 5))))
+#+END_SRC
+
+*** Automatic Visual Indention
+:PROPERTIES:
+:ID:       8e446d96-5cbb-4e9a-bed5-898d1cfe5908
+:END:
+
+I picked this up from a co-worker. Before I started using this setting I was
+managing whitespace indentation inside my org files. Now its all indented
+automatically but the source itself is not indented.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+    ;; Keep the indentation well structured by. OMG this is a must have. Makes
+    ;; it feel less like editing a big text file and more like a purpose built
+    ;; editor for org mode that forces the indentation.
+    (setq org-startup-indented t)
+#+END_SRC
+
+*** Zooming Text
+:PROPERTIES:
+:ID:       6b2c6c91-06f2-4735-951a-35bbf42d3582
+:END:
+
+Add these keys in to support familiar zooming of text with =Ctrl+= and =Ctrl-=.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+    ;; Familiar zooming with Ctrl+ and Ctrl-
+    (define-key global-map (kbd "C-+") 'text-scale-increase)
+    (define-key global-map (kbd "C--") 'text-scale-decrease)
+#+END_SRC
+
+*** Custom Key bindings
+:PROPERTIES:
+:ID:       3e314939-66f1-406d-b744-2120277e36ee
+:END:
+
+Spacemacs reserves =SPC o= and =SPC m o= for user defined key bindings.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+    (spacemacs/set-leader-keys
+     "oc" 'org-capture
+     "oa" 'org-agenda)
+#+END_SRC
+
+*** Automatically generate unique IDs on save
+:PROPERTIES:
+:ID:       b755c45a-7e0c-460c-bf89-1df09cc6fdcd
+:END:
+Internal links can get broken when you refile entries. This hook makes sure that
+each capture gets a unique id. Using the ID property for linking can help to
+keep links functional when refiling.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+    ;; This makes sure that each captured entry gets a unique ID
+  (add-hook 'org-capture-prepare-finalize-hook 'org-id-get-create)
+#+END_SRC
+
+*** Code block execution support
+:PROPERTIES:
+:ID:       ba119af1-12de-40bc-91b0-063334faf19b
+:END:
+
+This is where you add support for [[http://orgmode.org/worg/org-contrib/babel/languages.html][specific languages]] in 'src' code blocks.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (sh . t)
+     ))
+#+END_SRC
+
+Here I have a hook to automatically add unique IDs to each entry on save.
+
+*** Auto save hooks
+:PROPERTIES:
+:ID:       ef5d3bef-8f62-41de-a427-cd8df71b0a98
+:END:
+I used to have auto save configured as well for all agenda files, but I ran into
+some perform acne issues with some of my large (30k line) org files.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+    ;; AUTOMATICLALLY CREATE IDS for all nodes in org mode file on save. This
+    ;; helps when you use link to an entry and then it is moved to a different
+    ;; file.
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
+
+    ;; auto save agenda I ran into some performance issues when this is combined
+    ;; with adding ids to headlines. This seemed to be mostly related to some
+    ;; large (30k line) org files.
+    ;(add-hook 'org-agenda-mode-hook
+    ;          (lambda ()
+    ;            (add-hook 'auto-save-hook 'org-save-all-org-buffers nil t)
+    ;            (auto-save-mode)))
+#+END_SRC
+
+*** Keeping Secrets Encrypted
+:PROPERTIES:
+:ID:       e0a740d8-433b-432f-b375-97471c1a5435
+:END:
+
+Some things in my notes need to be kept secret. This allows me to tag entries
+with =crypt= to have them encrypted with my gpg key.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; http://yenliangl.blogspot.com/2009/12/encrypt-your-important-data-in-emacs.html
+  ;; http://emacs-fu.blogspot.com/2011/02/keeping-your-secrets-secret.html
+  ;; This allows me to encrypt subtrees that are tagged with crypt automatically.
+  ;; by default I want to encrypt it to myself. but with properties entries I cna encrypt to other people. which is useful in a shared file situation
+  (require 'org-crypt)
+
+  ;; Automatically re-encrypt entries on save to avoid leaking decrypted
+  ;; information.
+  (org-crypt-use-before-save-magic)
+  (setq org-crypt-disable-auto-save (quote encrypt))
+
+  ;; GPG key to use for encryption
+  ;; Either the Key ID or set to nil to use symmetric encryption.
+  (setq org-crypt-key "5D1CCC11")
+
+  ;; This prevents the crypt tag from being included in inheritance.
+  (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+#+END_SRC
+
+*** Initalize other packages
+:PROPERTIES:
+:ID:       fc0035b0-4b54-4ee1-b577-2612513b2a68
+:END:
+
+And finally require some of the additional packages that I use.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; Export to jira markup for more beautiful issue comments
+  (require 'ox-jira)
+  ;; Export to markdown for more beautiful comments in zendesk
+  (require 'ox-md)
+  ;; So that I can make presentations in org and display them with the beautiful
+  ;; reveal.js
+  (require 'ox-reveal)
+#+END_SRC
+
+And finally, we reach the end.
+
+#+BEGIN_SRC elisp :tangle dot-spacemacs
+)
+;; End dotspacemacs/user-config
+#+END_SRC

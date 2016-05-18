@@ -1,0 +1,1804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2016-05-18 Wed 15:51 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Level up your notes with Org</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Nick Anderson" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Level up your notes with Org</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Introduction</a></li>
+<li><a href="#orgheadline2">Getting started with Spacemacs</a></li>
+<li><a href="#orgheadline6">Configuring Spacemacs for Org</a></li>
+<li><a href="#orgheadline11">Using Org mode in Spacemacs</a></li>
+<li><a href="#orgheadline21">Org Markup</a></li>
+<li><a href="#orgheadline29">Different kinds of notes</a></li>
+<li><a href="#orgheadline30">Literate Devops (for technical notes)</a></li>
+<li><a href="#orgheadline33">Getting Compliments</a></li>
+<li><a href="#orgheadline39">Summary Tips</a></li>
+<li><a href="#orgheadline40">Thanks!</a></li>
+<li><a href="#orgheadline41"><span class="todo TODO">TODO</span> Deliver presentation at KLF2016</a></li>
+<li><a href="#orgheadline42"><span class="done DONE">DONE</span> Document <code>.spacemacs</code></a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><a id="ID-ed80d66f-ab63-4251-9a0e-4df829a6c13c"></a>Introduction</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<blockquote>
+<p>
+Org mode is for keeping notes, maintaining TODO lists, planning projects and
+authoring documents with a fast and effective plain text system. &#x2013;
+<a href="http://orgmode.org/">http://orgmode.org/</a>
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><a id="ID-7c5bc67e-ec60-4085-b5e9-9d1a4b061188"></a>Getting started with Spacemacs</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<blockquote>
+<p>
+Spacemacs is a "community-driven Emacs distribution".
+</p>
+
+<p>
+"The best editor is neither Emacs nor Vim, it's Emacs <b>and</b> Vim!".
+</p>
+
+<p>
+&#x2013; spacemacs.org
+</p>
+</blockquote>
+
+<div class="NOTES">
+<p>
+I think spacemacs is the easiest way to get started
+</p>
+
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><a id="ID-f3c82fbc-1bb6-456a-bfed-8fcc04dd8449"></a>Why Spacemacs?</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<ul class="org-ul">
+<li>As a <b>vim</b> user I can easily use Emacs.</li>
+<li>Managing configs is much easier.</li>
+<li><b>You</b> don't have to use vim key bindings.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4"><a id="ID-4ef15512-a4c1-4ef8-b148-b8d5a5a4b102"></a>Backup</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+First backup your existing Emacs config if you have one.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir ~/emacs_backup
+mv ~/init.el ~/emacs_backup/
+mv .emacs.d ~/emacs_backup/
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><a id="ID-2dba716c-e2c1-44b9-84da-ca66dec2a3c0"></a>Install</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+Then install spacemacs (I assume you already have Emacs installed).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6"><a id="ID-9b81b83b-a3ad-463d-a6a2-eaa991cf3eb0"></a>Configuring Spacemacs for Org</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><a id="ID-9df0bbde-2a84-4da1-9178-539ab4695cfd"></a><code>~/.spacemacs</code></h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<ul class="org-ul">
+<li><p>
+Generate one with defaults
+</p>
+
+<pre class="example">
+&lt;SPC&gt; : dotspacemacs/install RET
+</pre></li>
+
+<li><p>
+To open the installed dotfile:
+</p>
+
+<pre class="example">
+&lt;SPC&gt; f e d
+</pre></li>
+</ul>
+
+<p>
+<b>Note:</b> The <code>.spacemacs</code> used for this presentation is documented at the end of
+ the presentation. You may want to refer to the tangled <a href="./dot-spacemacs"><code>dot-spacemacs</code></a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><a id="ID-52af43c9-6532-43ad-929a-204136c03f70"></a>Layers</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<ul class="org-ul">
+<li>Self contained units of configuration</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><a id="ID-24b385cb-7a6c-44cc-ab67-acf0f516461f"></a>Enable org layer</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<p>
+Enable the <code>org</code> layer in <code>dotspacemacs/layers</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">defun</span> <span style="color: #bc6ec5; font-weight: bold;">dotspacemacs/layers</span> <span style="color: #bc6ec5;">()</span>
+  <span style="color: #2aa1ae;">"Configuration Layers declaration.</span>
+<span style="color: #2aa1ae;">You should not put any user code in this function besides modifying the variable</span>
+<span style="color: #2aa1ae;">values."</span>
+  <span style="color: #bc6ec5;">(</span>setq-default
+   dotspacemacs-configuration-layers '<span style="color: #2d9574;">(</span> org <span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<div class="NOTES">
+<p>
+After editing the config, close and restart Emacs to install the layer.
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><a id="ID-918f19f2-dd9d-4792-9575-42123a17d3a3"></a>Agenda files</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<p>
+<b>TODO</b> items, <b>time-stamped</b> items, and <b>tagged headlines</b> can be scattered
+throughout a file or even a number of files. <a href="https://www.gnu.org/software/emacs/manual/html_node/org/Agenda-Views.html#Agenda-Views">Agenda views</a> allow Org to select
+entries based on various criteria for display in a separate buffer.
+</p>
+
+<p>
+Tell org where you keep your notes. Make sure this presentation is included!
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Set the org-agenda files</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Subdirectories must be explicitly specified.</span>
+<span style="color: #4f97d7;">(</span>setq org-agenda-files
+  '<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">"~/org"</span> <span style="color: #2d9574;">"~/src/presentations/Level-up-your-notes-with-Org"</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<div class="NOTES">
+<p>
+The agenda is neat, though I admit I have not trained myself to live in it yet.
+It allows you to search and display items throughout your org files. You can
+even interact with things directly from agenda views.
+</p>
+
+<ul class="org-ul">
+<li>an agenda that is like a calendar and shows information for specific dates</li>
+<li>a TODO list that covers all unfinished action items,</li>
+<li>a match view, showings headlines based on the tags, properties, and TODO
+state associated with them,</li>
+<li>a timeline view that shows all events in a single Org file, in time-sorted
+view,</li>
+<li>a text search view that shows all entries from multiple files that contain
+specified keywords,</li>
+<li>a stuck projects view showing projects that currently don’t move along, and</li>
+<li>custom views that are special searches and combinations of different views.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11"><a id="ID-b6cc044c-384f-4cde-8de8-991f1232e135"></a>Using Org mode in Spacemacs</h2>
+<div class="outline-text-2" id="text-orgheadline11">
+</div>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><a id="ID-7d103e08-0d1f-40e3-8157-924cc5437660"></a>Make a new entry</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<p>
+In Org each entry is simply a line starting with one or more <code>*</code>. To insert a
+new headline after the current one type <code>&lt;comma&gt; h i</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><a id="ID-d686855a-e312-45e8-b9ce-7019020079fc"></a>Capture a new TODO (or other standard type of entry)</h3>
+<div class="outline-text-3" id="text-orgheadline13">
+<p>
+Capture templates make capturing new entries quick and easy.
+</p>
+
+<p>
+<b>Note:</b> The configuration used for this presentation allows you to capture a new
+TODO by typing <code>&lt;comma&gt; c t</code>.
+</p>
+
+<div class="NOTES">
+<p>
+I have played with various capture templates for meeting notes, todos and other
+kinds of tasks. Except for TODOs none of the other capture templates I have
+tried have stuck for me, but I keep experimenting.
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><a id="ID-86a5ba5e-437a-4ee8-b85b-a7722dd84ca8"></a>Tag entries for search&#xa0;&#xa0;&#xa0;<span class="tag"><span class="findme">findme</span></span></h3>
+<div class="outline-text-3" id="text-orgheadline14">
+<p>
+You can tag headlines so that they are easy to find later. With the insertion
+point on a header type <code>&lt;comma&gt; :</code> to tag the entry.
+</p>
+
+<ul class="org-ul">
+<li>Separate tags with <code>:</code></li>
+<li>Spaces aren't allowed</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><a id="ID-ca5424ad-4560-4d4b-a0cb-8ae8081574e8"></a>Agenda views</h3>
+<div class="outline-text-3" id="text-orgheadline15">
+<p>
+From an org file:
+</p>
+<ul class="org-ul">
+<li><code>&lt;comma&gt; a</code></li>
+</ul>
+
+<p>
+From anywhere in Spacemacs:
+</p>
+<ul class="org-ul">
+<li><code>SPC a o o</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16"><a id="ID-b761c6f2-e0b5-4847-b56d-ca65adedf182"></a>Searching for entries</h3>
+<div class="outline-text-3" id="text-orgheadline16">
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><a id="ID-14a6a197-fd02-4ef7-b44d-c161f7828513"></a>CLI Tools</h3>
+<div class="outline-text-3" id="text-orgheadline17">
+<p>
+Since this is all just plain text, you can use your favorite command line
+utilities like <a href="http://geoff.greer.fm/ag/"><code>ag</code></a>, <a href="http://beyondgrep.com/"><code>ack</code></a> or <code>grep</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><a id="ID-987a1069-b64c-4dfd-bd8b-5ee7666fa6db"></a>Agenda Searches</h3>
+<div class="outline-text-3" id="text-orgheadline18">
+<ul class="org-ul">
+<li><p>
+Search for entries tagged with <code>findme</code>
+</p>
+
+<p>
+From within an org file type <code>&lt;comma&gt; a m</code> and type findme.
+</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19"><a id="ID-64e115d7-2237-4d4a-81a3-22a242fb936e"></a>Stay focused</h3>
+<div class="outline-text-3" id="text-orgheadline19">
+<p>
+This is a good way to keep from being distracted. 
+</p>
+
+<ul class="org-ul">
+<li><code>org-narrow-to-subtree</code> <code>&lt;comma&gt; n</code></li>
+<li><code>widen</code> <code>&lt;comma&gt; N</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20"><a id="ID-f9696030-c847-4320-897f-829b35b4216d"></a>Clocking Time</h3>
+<div class="outline-text-3" id="text-orgheadline20">
+<ul class="org-ul">
+<li><code>org-clock-in</code> <code>&lt;comma&gt; I</code></li>
+<li><code>org-clock-out</code> <code>&lt;comma&gt; O</code></li>
+</ul>
+
+<p>
+<b>Note:</b> Try typing <code>: org-clock-report</code>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21"><a id="ID-4a24bcf1-9ed3-4e34-9454-f64d624fe3e5"></a>Org Markup</h2>
+<div class="outline-text-2" id="text-orgheadline21">
+<p>
+Org has its own markup syntax which is <b>really</b> beneficial for exporting.
+</p>
+
+<ul class="org-ul">
+<li>Markup your text, you will thank me later</li>
+<li>This is <b>key to getting compliments</b></li>
+</ul>
+
+<div class="NOTES">
+<p>
+Really, spend the time to mark up the text.
+</p>
+
+</div>
+</div>
+
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><a id="ID-1e18590d-b9ac-4e80-8ffd-899df3c990ca"></a>Emphasis and monospace</h3>
+<div class="outline-text-3" id="text-orgheadline22">
+<div class="org-src-container">
+
+<pre class="src src-text">You can make words *bold*, /italic/, _underlined_, =verbatim= and ~code~, and,
+if you must, '+strike-through+'. Text in the code and verbatim string is not
+processed for Org mode specific syntax, it is exported verbatim.
+</pre>
+</div>
+
+<p>
+You can make words <b>bold</b>, <i>italic</i>, <span class="underline">underlined</span>, <code>verbatim</code> and <code>code</code>, and,
+if you must, '<del>strike-through</del>'. Text in the code and verbatim string is not
+processed for Org mode specific syntax, it is exported verbatim.
+</p>
+
+<p>
+<b>Note:</b> If you can't remember the markup you can access these formatting options
+by typing <code>&lt;comma&gt; x</code>. Try doing this after highlighting a word.
+</p>
+
+<div class="NOTES">
+<p>
+<code>verbatim</code> and <code>code</code> are especially useful for technical notes that include
+commands.
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><a id="ID-351fd26b-1678-4c15-b3c5-30b162eb5efe"></a>Block quotes</h3>
+<div class="outline-text-3" id="text-orgheadline23">
+<pre class="example">
+#+BEGIN_QUOTE
+Clever remark -- me
+#+END_QUOTE
+</pre>
+
+<blockquote>
+<p>
+Clever remark &#x2013; me
+</p>
+</blockquote>
+
+<p>
+<b>Note:</b> Try typing <code>&lt;q</code> followed by the <code>&lt;TAB&gt;</code> key.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24"><a id="ID-dbdc48d2-efa9-4f6d-aaa7-df239cdd10a1"></a>Example blocks</h3>
+<div class="outline-text-3" id="text-orgheadline24">
+<div class="org-src-container">
+
+<pre class="src src-text">#+BEGIN_EXAMPLE
+Are useful for rendering mutlilne blocks verbatim.
+#+END_EXAMPLE
+</pre>
+</div>
+
+<pre class="example">
+Are useful for rendering mutlilne blocks verbatim.
+</pre>
+
+<p>
+<b>Note:</b> Try typing <code>&lt;e</code> followed by the <code>&lt;TAB&gt;</code> key.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><a id="ID-3243b395-eede-4a52-9bcc-6b71e2c0e258"></a>Code blocks</h3>
+<div class="outline-text-3" id="text-orgheadline25">
+<p>
+Source code can be included in Org mode documents using a 'src' block.
+</p>
+
+<pre class="example">
+#+BEGIN_SRC cfengine3
+bundle agent main {
+  reports: "Hello World!";
+}
+#+END_SRC
+</pre>
+
+<p>
+They render nicely when exported
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-cfengine3"><span style="color: #4f97d7;">bundle</span> <span style="color: #a45bad;">agent</span> <span style="color: #bc6ec5; font-weight: bold;">main</span> <span style="color: #4f97d7;">{</span>
+  <span style="color: #4f97d7;">reports</span>: <span style="color: #2d9574;">"Hello World!"</span>;
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+
+<p>
+<b>Note:</b> Try typing <code>&lt;s</code> followed by the <code>&lt;TAB&gt;</code> key. Many languages are supported.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline26" class="outline-3">
+<h3 id="orgheadline26"><a id="ID-2b7d654a-6b48-4d5f-8994-71e29582cb78"></a>Links</h3>
+<div class="outline-text-3" id="text-orgheadline26">
+<p>
+You can link to <a href="#orgheadline22">other nodes in a document</a> or to <a href="http://lmgtfy.com/">external places</a>.
+</p>
+
+<pre class="example">
+You can link to [[Emphasis and monospace][other nodes in a document]] or to [[http://lmgtfy.com][external places]].
+</pre>
+
+<p>
+<b><code>[[TARGET] [TEXT]]</code></b>
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><a id="ID-e97062de-0f30-49d2-ad1e-b9d6d4d9e553"></a>Pictures</h3>
+<div class="outline-text-3" id="text-orgheadline27">
+<p>
+Worth a thousand words
+</p>
+
+<pre class="example">
+[[./media/best-nyan-cat-gif-963.gif]]
+</pre>
+
+
+<div class="figure">
+<p><img src="./media/best-nyan-cat-gif-963.gif" alt="best-nyan-cat-gif-963.gif" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><a id="ID-4cdfb986-b1db-434f-91bb-436b4ab8bd6c"></a>Tables</h3>
+<div class="outline-text-3" id="text-orgheadline28">
+<pre class="example">
+| Tables | Are     |
+|--------+---------|
+| easy   | to make |
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Tables</th>
+<th scope="col" class="org-left">Are</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">easy</td>
+<td class="org-left">to make</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline29" class="outline-2">
+<h2 id="orgheadline29"><a id="ID-42ac72a9-78dc-49f9-a964-38dd7f056796"></a>Different kinds of notes</h2>
+<div class="outline-text-2" id="text-orgheadline29">
+<ul class="org-ul">
+<li>Meeting minutes</li>
+<li>TODOs</li>
+<li>Random things to remember</li>
+<li><b>Technical notes</b></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline30" class="outline-2">
+<h2 id="orgheadline30"><a id="ID-91c2d0be-6249-4bfc-8f23-bdc010bb3889"></a>Literate Devops (for technical notes)</h2>
+<div class="outline-text-2" id="text-orgheadline30">
+<ul class="org-ul">
+<li><a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">Literate Devops</a></li>
+<li><a href="https://www.youtube.com/watch?v=dljNabciEGg">Literate Devops Demo</a></li>
+</ul>
+
+<div class="NOTES">
+<p>
+I found this post by Howard Abrams a couple years ago (the way back machine
+actually indicates it appeared in the end of 2014).
+</p>
+
+<p>
+I continue to re-visit it from time to time as I try to stay inside org more.
+</p>
+
+</div>
+</div>
+
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><a id="ID-b1ab0af5-ad9a-43a4-9069-0db70cd51109"></a>Executable code blocks</h3>
+<div class="outline-text-3" id="text-orgheadline31">
+<p>
+Some languages support executing code blocks. Try placing the insertion point
+within the code block and typing <code>&lt;comma&gt; &lt;comma&gt;</code>.
+</p>
+
+<pre class="example">
+#+BEGIN_SRC sh :exports both :wrap EXAMPLE
+  /bin/echo "Hello $(date)"
+#+END_SRC
+</pre>
+
+<p>
+Execution results can be exported.
+</p>
+
+<pre class="example">
+Hello Tue May 17 16:48:07 CDT 2016
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32"><a id="ID-163d5c10-1711-45fb-b7c1-00944b97e9a3"></a>Execute code blocks on remote hosts with Tramp</h3>
+<div class="outline-text-3" id="text-orgheadline32">
+<pre class="example">
+#+BEGIN_SRC sh :exports both :wrap EXAMPLE :dir /ssh:user@example.host.tld:
+  hostname
+#+END_SRC
+</pre>
+
+<pre class="example">
+example.host.tld
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline33" class="outline-2">
+<h2 id="orgheadline33"><a id="ID-d8b85004-65a3-4df4-9c4e-e594f75963bb"></a>Getting Compliments</h2>
+<div class="outline-text-2" id="text-orgheadline33">
+<p>
+Comments like these are a regular occurrence.
+</p>
+
+<blockquote>
+<p>
+"I really love the reporting you use.  What is that?"
+&#x2013; Todd Rix
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+"Dammit, Nick!" &#x2013; Jimis
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+"Impressive notes!" &#x2013; Thomas Ryd
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-orgheadline34" class="outline-3">
+<h3 id="orgheadline34"><a id="ID-6c40f13f-1f47-4450-94de-3ae63504ed7e"></a>Exporting Notes</h3>
+<div class="outline-text-3" id="text-orgheadline34">
+<p>
+Exporting your notes makes <b>all</b> the difference.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35"><a id="ID-fb06919e-95f2-41f1-ae35-aedf3be98879"></a>Exporting to HTML</h3>
+<div class="outline-text-3" id="text-orgheadline35">
+<p>
+The default html export is not bad, but to really wow people with html exported
+versions of your notes check out <a href="https://github.com/fniessen/org-html-themes">org-html-themes</a>.
+</p>
+
+<p>
+I like readtheorg.
+</p>
+
+<pre class="example">
+#+SETUPFILE: ~/src/org-html-themes/setup/theme-readtheorg.setup
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline36" class="outline-3">
+<h3 id="orgheadline36"><a id="ID-1914078c-3482-49f0-9b01-617df0fc0d3c"></a>Exporting for Presentations</h3>
+<div class="outline-text-3" id="text-orgheadline36">
+<p>
+I made this whole presentation in org-mode and I used the <code>ox-reveal</code> package to
+export it. This allows me to version my presentations like any other plain text
+source.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline37" class="outline-3">
+<h3 id="orgheadline37"><a id="ID-060cf0ac-b0bc-44cd-8d42-014a05ef4478"></a>Narrow before exporting</h3>
+<div class="outline-text-3" id="text-orgheadline37">
+<p>
+Narrowing before exporting can be useful so you share only a subset of notes.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline38" class="outline-3">
+<h3 id="orgheadline38"><a id="ID-042325cc-a327-4e62-a092-64303d5c47db"></a>Clocktables for the PHB</h3>
+<div class="outline-text-3" id="text-orgheadline38">
+<p>
+If you are good about tracking your time and you have a PHB, checkout
+<code>: org-clock-report</code>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> Clock summary at <span class="timestamp-wrapper"><span class="timestamp">[2016-05-18 Wed 15:47]</span></span></caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Headline</th>
+<th scope="col" class="org-left">Time</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><b>Total time</b></td>
+<td class="org-left"><b>0:02</b></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&ensp;&ensp;Clocktables for the PHB</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">0:02</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline39" class="outline-2">
+<h2 id="orgheadline39"><a id="ID-cae8144c-44ec-475d-aa3a-bf7f213b1226"></a>Summary Tips</h2>
+<div class="outline-text-2" id="text-orgheadline39">
+<ul class="org-ul">
+<li>Use org markup!</li>
+<li>Start with one file</li>
+<li>Keep it simple</li>
+<li>Let it grow organically</li>
+<li>Start recording the compliments you get right away!</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline40" class="outline-2">
+<h2 id="orgheadline40"><a id="ID-109918df-ec2a-47d6-a9a1-c80de9232d18"></a>Thanks!</h2>
+<div class="outline-text-2" id="text-orgheadline40">
+<p>
+Happy Orging
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline41" class="outline-2">
+<h2 id="orgheadline41"><a id="ID-4c4b5abb-810c-4961-9c12-9c9edccd6a22"></a><span class="todo TODO">TODO</span> Deliver presentation at KLF2016</h2>
+<div class="outline-text-2" id="text-orgheadline41">
+</div>
+</div>
+
+<div id="outline-container-orgheadline42" class="outline-2">
+<h2 id="orgheadline42"><a id="ID-8f22d7bf-12dd-435f-ba96-c968f9b5a52e"></a><span class="done DONE">DONE</span> Document <code>.spacemacs</code></h2>
+<div class="outline-text-2" id="text-orgheadline42">
+</div>
+
+<div id="outline-container-orgheadline43" class="outline-3">
+<h3 id="orgheadline43"><a id="ID-b21ba2c2-4cd9-4c31-9030-3650080b60c7"></a><code>dotspacemacs/layers</code></h3>
+<div class="outline-text-3" id="text-orgheadline43">
+</div>
+
+<div id="outline-container-orgheadline44" class="outline-4">
+<h4 id="orgheadline44"><a id="ID-716faa0f-0d3c-4c7e-a33c-07e3b0939f98"></a>Layers</h4>
+<div class="outline-text-4" id="text-orgheadline44">
+<p>
+These are the layers that are needed for this presentation. I have a cfengine
+snippet in the presentation, so I include that layer. But note it's in the
+<code>develop</code> branch of spacemacs still.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">-*- mode: emacs-lisp -*-</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">This file is loaded by Spacemacs at startup.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">It must be stored in your home directory.</span>
+
+<span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">defun</span> <span style="color: #bc6ec5; font-weight: bold;">dotspacemacs/layers</span> <span style="color: #bc6ec5;">()</span>
+  <span style="color: #2aa1ae;">"Configuration Layers declaration.</span>
+<span style="color: #2aa1ae;">You should not put any user code in this function besides modifying the variable</span>
+<span style="color: #2aa1ae;">values."</span>
+  <span style="color: #bc6ec5;">(</span>setq-default
+   dotspacemacs-configuration-layers
+   '<span style="color: #2d9574;">(</span>
+     <span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">----------------------------------------------------------------</span>
+     <span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Example of useful layers you may want to use right away.</span>
+     <span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Uncomment some layer names and press &lt;SPC f e R&gt; (Vim style) or</span>
+     <span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">&lt;M-m f e R&gt; (Emacs style) to install them.</span>
+     <span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">----------------------------------------------------------------</span>
+     cfengine
+     emacs-lisp
+     git
+     github
+     markdown
+     org
+     html
+     spell-checking
+     syntax-checking<span style="color: #2d9574;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline45" class="outline-4">
+<h4 id="orgheadline45"><a id="ID-ca3563f3-a421-4917-a400-27f3079c5c21"></a>Additional Packages</h4>
+<div class="outline-text-4" id="text-orgheadline45">
+<p>
+The <code>ox-jira</code> package makes it easy to export into text marked up for Jira.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">List of additional packages that will be installed without being</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">wrapped in a layer. If you need some configuration for these</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">packages, then consider creating a layer. You can also put the</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">configuration in `</span><span style="color: #a45bad; background-color: #292e34;">dotspacemacs/user-config</span><span style="color: #2aa1ae; background-color: #292e34;">'.</span>
+dotspacemacs-additional-packages '<span style="color: #4f97d7;">(</span>ox-jira ox-reveal json-mode<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+And that wraps up my <code>dotspacemacs/layers</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #e0211d; text-decoration: overline;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">End dotspacemacs/layers</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline46" class="outline-3">
+<h3 id="orgheadline46"><a id="ID-5a4be116-8803-475c-bc85-f012057f30fb"></a><code>dotspacemacs/init</code></h3>
+<div class="outline-text-3" id="text-orgheadline46">
+<p>
+I don't really mess with much in here.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">defun</span> <span style="color: #bc6ec5; font-weight: bold;">dotspacemacs/init</span> <span style="color: #bc6ec5;">()</span>
+  <span style="color: #2aa1ae;">"Initialization function.</span>
+<span style="color: #2aa1ae;">This function is called at the very startup of Spacemacs initialization</span>
+<span style="color: #2aa1ae;">before layers configuration.</span>
+<span style="color: #2aa1ae;">You should not put any user code in there besides modifying the variable</span>
+<span style="color: #2aa1ae;">values."</span>
+  <span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">This setq-default sexp is an exhaustive list of all the supported</span>
+  <span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">spacemacs settings.</span>
+  <span style="color: #bc6ec5;">(</span>setq-default
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline47" class="outline-4">
+<h4 id="orgheadline47"><a id="ID-4df10774-eae1-474c-a979-cc8c4c8bfc92"></a>Unchanged Spacemacs Defaults</h4>
+<div class="outline-text-4" id="text-orgheadline47">
+<p>
+These are spacemacs defaults that I left unchanged.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil ELPA repositories are contacted via HTTPS whenever it's</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">possible. Set it to nil if you have no way to use HTTPS in your</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">environment, otherwise it is strongly recommended to let it set to t.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">This variable has no effect if Emacs is launched with the parameter</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">`</span><span style="color: #a45bad; background-color: #292e34;">--insecure</span><span style="color: #2aa1ae; background-color: #292e34;">' which forces the value of this variable to nil.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default t)</span>
+dotspacemacs-elpa-https t
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Maximum allowed time in seconds to contact an ELPA repository.</span>
+dotspacemacs-elpa-timeout <span style="color: #a45bad;">5</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil then spacemacs will check for updates at startup</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">when the current branch is not `</span><span style="color: #a45bad; background-color: #292e34;">develop</span><span style="color: #2aa1ae; background-color: #292e34;">'. (default t)</span>
+dotspacemacs-check-for-update t
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">One of `</span><span style="color: #a45bad; background-color: #292e34;">vim</span><span style="color: #2aa1ae; background-color: #292e34;">', `</span><span style="color: #a45bad; background-color: #292e34;">emacs</span><span style="color: #2aa1ae; background-color: #292e34;">' or `</span><span style="color: #a45bad; background-color: #292e34;">hybrid</span><span style="color: #2aa1ae; background-color: #292e34;">'. Evil is always enabled but if the</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">variable is `</span><span style="color: #a45bad; background-color: #292e34;">emacs</span><span style="color: #2aa1ae; background-color: #292e34;">' then the `</span><span style="color: #a45bad; background-color: #292e34;">holy-mode</span><span style="color: #2aa1ae; background-color: #292e34;">' is enabled at startup. `</span><span style="color: #a45bad; background-color: #292e34;">hybrid</span><span style="color: #2aa1ae; background-color: #292e34;">'</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">uses emacs key bindings for vim's insert mode, but otherwise leaves evil</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">unchanged. (default 'vim)</span>
+dotspacemacs-editing-style 'vim
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil output loading progress in `</span><span style="color: #a45bad; background-color: #292e34;">*Messages*</span><span style="color: #2aa1ae; background-color: #292e34;">' buffer. (default nil)</span>
+dotspacemacs-verbose-loading nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Specify the startup banner. Default value is `</span><span style="color: #a45bad; background-color: #292e34;">official</span><span style="color: #2aa1ae; background-color: #292e34;">', it displays</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">the official spacemacs logo. An integer value is the index of text</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">banner, `</span><span style="color: #a45bad; background-color: #292e34;">random</span><span style="color: #2aa1ae; background-color: #292e34;">' chooses a random text banner in `</span><span style="color: #a45bad; background-color: #292e34;">core/banners</span><span style="color: #2aa1ae; background-color: #292e34;">'</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">directory. A string value must be a path to an image format supported</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">by your Emacs build.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If the value is nil then no banner is displayed. (default 'official)</span>
+dotspacemacs-startup-banner 'official
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">List of items to show in the startup buffer. If nil it is disabled.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Possible values are: `</span><span style="color: #a45bad; background-color: #292e34;">recents</span><span style="color: #2aa1ae; background-color: #292e34;">' `</span><span style="color: #a45bad; background-color: #292e34;">bookmarks</span><span style="color: #2aa1ae; background-color: #292e34;">' `</span><span style="color: #a45bad; background-color: #292e34;">projects</span><span style="color: #2aa1ae; background-color: #292e34;">'.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default '(recents projects))</span>
+dotspacemacs-startup-lists '<span style="color: #4f97d7;">(</span>recents projects<span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Number of recent files to show in the startup buffer. Ignored if</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">`</span><span style="color: #a45bad; background-color: #292e34;">dotspacemacs-startup-lists</span><span style="color: #2aa1ae; background-color: #292e34;">' doesn't include `</span><span style="color: #a45bad; background-color: #292e34;">recents</span><span style="color: #2aa1ae; background-color: #292e34;">'. (default 5)</span>
+dotspacemacs-startup-recent-list-size <span style="color: #a45bad;">5</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Default major mode of the scratch buffer (default `</span><span style="color: #a45bad; background-color: #292e34;">text-mode</span><span style="color: #2aa1ae; background-color: #292e34;">')</span>
+dotspacemacs-scratch-mode 'text-mode
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline48" class="outline-4">
+<h4 id="orgheadline48"><a id="ID-d36d31e5-d1a4-40b2-8f95-4ea1b2d7a359"></a>Editing style</h4>
+<div class="outline-text-4" id="text-orgheadline48">
+<p>
+I didn't change the default here, but <b>Emacs users</b> might want to change the
+editing style.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">One of `</span><span style="color: #a45bad; background-color: #292e34;">vim</span><span style="color: #2aa1ae; background-color: #292e34;">', `</span><span style="color: #a45bad; background-color: #292e34;">emacs</span><span style="color: #2aa1ae; background-color: #292e34;">' or `</span><span style="color: #a45bad; background-color: #292e34;">hybrid</span><span style="color: #2aa1ae; background-color: #292e34;">'. Evil is always enabled but if the</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">variable is `</span><span style="color: #a45bad; background-color: #292e34;">emacs</span><span style="color: #2aa1ae; background-color: #292e34;">' then the `</span><span style="color: #a45bad; background-color: #292e34;">holy-mode</span><span style="color: #2aa1ae; background-color: #292e34;">' is enabled at startup. `</span><span style="color: #a45bad; background-color: #292e34;">hybrid</span><span style="color: #2aa1ae; background-color: #292e34;">'</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">uses emacs key bindings for vim's insert mode, but otherwise leaves evil</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">unchanged. (default 'vim)</span>
+dotspacemacs-editing-style 'vim
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline49" class="outline-4">
+<h4 id="orgheadline49"><a id="ID-09bb3e9d-69b3-44dd-bb81-b435963187e5"></a>More Spacemacs defaults</h4>
+<div class="outline-text-4" id="text-orgheadline49">
+<p>
+These are some more spacemacs default values.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil output loading progress in `</span><span style="color: #a45bad; background-color: #292e34;">*Messages*</span><span style="color: #2aa1ae; background-color: #292e34;">' buffer. (default nil)</span>
+dotspacemacs-verbose-loading nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Specify the startup banner. Default value is `</span><span style="color: #a45bad; background-color: #292e34;">official</span><span style="color: #2aa1ae; background-color: #292e34;">', it displays</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">the official spacemacs logo. An integer value is the index of text</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">banner, `</span><span style="color: #a45bad; background-color: #292e34;">random</span><span style="color: #2aa1ae; background-color: #292e34;">' chooses a random text banner in `</span><span style="color: #a45bad; background-color: #292e34;">core/banners</span><span style="color: #2aa1ae; background-color: #292e34;">'</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">directory. A string value must be a path to an image format supported</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">by your Emacs build.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If the value is nil then no banner is displayed. (default 'official)</span>
+dotspacemacs-startup-banner 'official
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">List of items to show in the startup buffer. If nil it is disabled.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Possible values are: `</span><span style="color: #a45bad; background-color: #292e34;">recents</span><span style="color: #2aa1ae; background-color: #292e34;">' `</span><span style="color: #a45bad; background-color: #292e34;">bookmarks</span><span style="color: #2aa1ae; background-color: #292e34;">' `</span><span style="color: #a45bad; background-color: #292e34;">projects</span><span style="color: #2aa1ae; background-color: #292e34;">'.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default '(recents projects))</span>
+dotspacemacs-startup-lists '<span style="color: #4f97d7;">(</span>recents projects<span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Number of recent files to show in the startup buffer. Ignored if</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">`</span><span style="color: #a45bad; background-color: #292e34;">dotspacemacs-startup-lists</span><span style="color: #2aa1ae; background-color: #292e34;">' doesn't include `</span><span style="color: #a45bad; background-color: #292e34;">recents</span><span style="color: #2aa1ae; background-color: #292e34;">'. (default 5)</span>
+dotspacemacs-startup-recent-list-size <span style="color: #a45bad;">5</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Default major mode of the scratch buffer (default `</span><span style="color: #a45bad; background-color: #292e34;">text-mode</span><span style="color: #2aa1ae; background-color: #292e34;">')</span>
+dotspacemacs-scratch-mode 'text-mode
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline50" class="outline-4">
+<h4 id="orgheadline50"><a id="ID-db955651-f33e-4c78-8210-f24fb382460c"></a>Theme</h4>
+<div class="outline-text-4" id="text-orgheadline50">
+<p>
+I do prefer the dark solarized theme.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">List of themes, the first of the list is loaded when spacemacs starts.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Press &lt;SPC&gt; T n to cycle to the next theme in the list (works great</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">with 2 themes variants, one dark and one light)</span>
+dotspacemacs-themes '<span style="color: #4f97d7;">(</span>
+                      solarized-dark
+                      spacemacs-dark
+                      spacemacs-light
+                      solarized-light
+                      leuven
+                      monokai
+                      zenburn<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline51" class="outline-4">
+<h4 id="orgheadline51"><a id="ID-557f434a-663e-40ed-85f4-b9aab744076b"></a>Even more default spacemacs values</h4>
+<div class="outline-text-4" id="text-orgheadline51">
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil the cursor color matches the state color in GUI Emacs.</span>
+dotspacemacs-colorize-cursor-according-to-state t
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Default font. `</span><span style="color: #a45bad; background-color: #292e34;">powerline-scale</span><span style="color: #2aa1ae; background-color: #292e34;">' allows to quickly tweak the mode-line</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">size to make separators look not too crappy.</span>
+dotspacemacs-default-font '<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">"Source Code Pro"</span>
+                            <span style="color: #4f97d7;">:size</span> <span style="color: #a45bad;">13</span>
+                            <span style="color: #4f97d7;">:weight</span> normal
+                            <span style="color: #4f97d7;">:width</span> normal
+                            <span style="color: #4f97d7;">:powerline-scale</span> <span style="color: #a45bad;">1.1</span><span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">The leader key</span>
+dotspacemacs-leader-key <span style="color: #2d9574;">"SPC"</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">The leader key accessible in `emacs state' and `insert state'</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default "M-m")</span>
+dotspacemacs-emacs-leader-key <span style="color: #2d9574;">"M-m"</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Major mode leader key is a shortcut key which is the equivalent of</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">pressing `&lt;leader&gt; m`. Set it to `nil` to disable it. (default ",")</span>
+dotspacemacs-major-mode-leader-key <span style="color: #2d9574;">","</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Major mode leader key accessible in `emacs state' and `insert state'.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default "C-M-m)</span>
+dotspacemacs-major-mode-emacs-leader-key <span style="color: #2d9574;">"C-M-m"</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">These variables control whether separate commands are bound in the GUI to</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">the key pairs C-i, TAB and C-m, RET.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Setting it to a non-nil value, allows for separate commands under &lt;C-i&gt;</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">and TAB or &lt;C-m&gt; and RET.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">In the terminal, these pairs are generally indistinguishable, so this only</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">works in the GUI. (default nil)</span>
+dotspacemacs-distinguish-gui-tab nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(Not implemented) dotspacemacs-distinguish-gui-ret nil</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">The command key used for Evil commands (ex-commands) and</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Emacs commands (M-x).</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">By default the command key is `:' so ex-commands are executed like in Vim</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">with `:' and Emacs commands are executed with `&lt;leader&gt; :'.</span>
+dotspacemacs-command-key <span style="color: #2d9574;">":"</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil `Y' is remapped to `</span><span style="color: #a45bad; background-color: #292e34;">y$</span><span style="color: #2aa1ae; background-color: #292e34;">'. (default t)</span>
+dotspacemacs-remap-Y-to-y$ t
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Name of the default layout (default "Default")</span>
+dotspacemacs-default-layout-name <span style="color: #2d9574;">"Default"</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil the default layout name is displayed in the mode-line.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default nil)</span>
+dotspacemacs-display-default-layout nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil then the last auto saved layouts are resume automatically upon</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">start. (default nil)</span>
+dotspacemacs-auto-resume-layouts nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Location where to auto-save files. Possible values are `</span><span style="color: #a45bad; background-color: #292e34;">original</span><span style="color: #2aa1ae; background-color: #292e34;">' to</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">auto-save the file in-place, `</span><span style="color: #a45bad; background-color: #292e34;">cache</span><span style="color: #2aa1ae; background-color: #292e34;">' to auto-save the file to another</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">file stored in the cache directory and `</span><span style="color: #a45bad; background-color: #292e34;">nil</span><span style="color: #2aa1ae; background-color: #292e34;">' to disable auto-saving.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default 'cache)</span>
+dotspacemacs-auto-save-file-location 'cache
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Maximum number of rollback slots to keep in the cache. (default 5)</span>
+dotspacemacs-max-rollback-slots <span style="color: #a45bad;">5</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil then `</span><span style="color: #a45bad; background-color: #292e34;">ido</span><span style="color: #2aa1ae; background-color: #292e34;">' replaces `</span><span style="color: #a45bad; background-color: #292e34;">helm</span><span style="color: #2aa1ae; background-color: #292e34;">' for some commands. For now only</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">`</span><span style="color: #a45bad; background-color: #292e34;">find-files</span><span style="color: #2aa1ae; background-color: #292e34;">' (SPC f f), `</span><span style="color: #a45bad; background-color: #292e34;">find-spacemacs-file</span><span style="color: #2aa1ae; background-color: #292e34;">' (SPC f e s), and</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">`</span><span style="color: #a45bad; background-color: #292e34;">find-contrib-file</span><span style="color: #2aa1ae; background-color: #292e34;">' (SPC f e c) are replaced. (default nil)</span>
+dotspacemacs-use-ido nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil, `</span><span style="color: #a45bad; background-color: #292e34;">helm</span><span style="color: #2aa1ae; background-color: #292e34;">' will try to minimize the space it uses. (default nil)</span>
+dotspacemacs-helm-resize nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">if non nil, the helm header is hidden when there is only one source.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default nil)</span>
+dotspacemacs-helm-no-header nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">define the position to display `</span><span style="color: #a45bad; background-color: #292e34;">helm</span><span style="color: #2aa1ae; background-color: #292e34;">', options are `</span><span style="color: #a45bad; background-color: #292e34;">bottom</span><span style="color: #2aa1ae; background-color: #292e34;">', `</span><span style="color: #a45bad; background-color: #292e34;">top</span><span style="color: #2aa1ae; background-color: #292e34;">',</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">`</span><span style="color: #a45bad; background-color: #292e34;">left</span><span style="color: #2aa1ae; background-color: #292e34;">', or `</span><span style="color: #a45bad; background-color: #292e34;">right</span><span style="color: #2aa1ae; background-color: #292e34;">'. (default 'bottom)</span>
+dotspacemacs-helm-position 'bottom
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil the paste micro-state is enabled. When enabled pressing `p`</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">several times cycle between the kill ring content. (default nil)</span>
+dotspacemacs-enable-paste-micro-state nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Which-key delay in seconds. The which-key buffer is the popup listing</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">the commands bound to the current keystroke sequence. (default 0.4)</span>
+dotspacemacs-which-key-delay <span style="color: #a45bad;">0.4</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Which-key frame position. Possible values are `</span><span style="color: #a45bad; background-color: #292e34;">right</span><span style="color: #2aa1ae; background-color: #292e34;">', `</span><span style="color: #a45bad; background-color: #292e34;">bottom</span><span style="color: #2aa1ae; background-color: #292e34;">' and</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">`</span><span style="color: #a45bad; background-color: #292e34;">right-then-bottom</span><span style="color: #2aa1ae; background-color: #292e34;">'. right-then-bottom tries to display the frame to the</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">right; if there is insufficient space it displays it at the bottom.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default 'bottom)</span>
+dotspacemacs-which-key-position 'bottom
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil a progress bar is displayed when spacemacs is loading. This</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">may increase the boot time on some systems and emacs builds, set it to</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">nil to boost the loading time. (default t)</span>
+dotspacemacs-loading-progress-bar t
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil the frame is fullscreen when Emacs starts up. (default nil)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(Emacs 24.4+ only)</span>
+dotspacemacs-fullscreen-at-startup nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil `</span><span style="color: #a45bad; background-color: #292e34;">spacemacs/toggle-fullscreen</span><span style="color: #2aa1ae; background-color: #292e34;">' will not use native fullscreen.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Use to disable fullscreen animations in OSX. (default nil)</span>
+dotspacemacs-fullscreen-use-non-native nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil the frame is maximized when Emacs starts up.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Takes effect only if `</span><span style="color: #a45bad; background-color: #292e34;">dotspacemacs-fullscreen-at-startup</span><span style="color: #2aa1ae; background-color: #292e34;">' is nil.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default nil) (Emacs 24.4+ only)</span>
+dotspacemacs-maximized-at-startup nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">A value from the range (0..100), in increasing opacity, which describes</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">the transparency level of a frame when it's active or selected.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Transparency can be toggled through `</span><span style="color: #a45bad; background-color: #292e34;">toggle-transparency</span><span style="color: #2aa1ae; background-color: #292e34;">'. (default 90)</span>
+dotspacemacs-active-transparency <span style="color: #a45bad;">90</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">A value from the range (0..100), in increasing opacity, which describes</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">the transparency level of a frame when it's inactive or deselected.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Transparency can be toggled through `</span><span style="color: #a45bad; background-color: #292e34;">toggle-transparency</span><span style="color: #2aa1ae; background-color: #292e34;">'. (default 90)</span>
+dotspacemacs-inactive-transparency <span style="color: #a45bad;">90</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil unicode symbols are displayed in the mode line. (default t)</span>
+dotspacemacs-mode-line-unicode-symbols t
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil smooth scrolling (native-scrolling) is enabled. Smooth</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">scrolling overrides the default behavior of Emacs which recenters the</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">point when it reaches the top or bottom of the screen. (default t)</span>
+dotspacemacs-smooth-scrolling t
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil line numbers are turned on in all `</span><span style="color: #a45bad; background-color: #292e34;">prog-mode</span><span style="color: #2aa1ae; background-color: #292e34;">' and `</span><span style="color: #a45bad; background-color: #292e34;">text-mode</span><span style="color: #2aa1ae; background-color: #292e34;">'</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">derivatives. If set to `</span><span style="color: #a45bad; background-color: #292e34;">relative</span><span style="color: #2aa1ae; background-color: #292e34;">', also turns on relative line numbers.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default nil)</span>
+dotspacemacs-line-numbers nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non-nil smartparens-strict-mode will be enabled in programming modes.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default nil)</span>
+dotspacemacs-smartparens-strict-mode nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Select a scope to highlight delimiters. Possible values are `</span><span style="color: #a45bad; background-color: #292e34;">any</span><span style="color: #2aa1ae; background-color: #292e34;">',</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">`</span><span style="color: #a45bad; background-color: #292e34;">current</span><span style="color: #2aa1ae; background-color: #292e34;">', `</span><span style="color: #a45bad; background-color: #292e34;">all</span><span style="color: #2aa1ae; background-color: #292e34;">' or `</span><span style="color: #a45bad; background-color: #292e34;">nil</span><span style="color: #2aa1ae; background-color: #292e34;">'. Default is `</span><span style="color: #a45bad; background-color: #292e34;">all</span><span style="color: #2aa1ae; background-color: #292e34;">' (highlight any scope and</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">emphasis the current one). (default 'all)</span>
+dotspacemacs-highlight-delimiters 'all
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">If non nil advises quit functions to keep server open when quitting.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default nil)</span>
+dotspacemacs-persistent-server nil
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">List of search tool executable names. Spacemacs uses the first installed</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">tool of the list. Supported tools are `</span><span style="color: #a45bad; background-color: #292e34;">ag</span><span style="color: #2aa1ae; background-color: #292e34;">', `</span><span style="color: #a45bad; background-color: #292e34;">pt</span><span style="color: #2aa1ae; background-color: #292e34;">', `</span><span style="color: #a45bad; background-color: #292e34;">ack</span><span style="color: #2aa1ae; background-color: #292e34;">' and `</span><span style="color: #a45bad; background-color: #292e34;">grep</span><span style="color: #2aa1ae; background-color: #292e34;">'.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default '("ag" "pt" "ack" "grep"))</span>
+dotspacemacs-search-tools '<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">"ag"</span> <span style="color: #2d9574;">"pt"</span> <span style="color: #2d9574;">"ack"</span> <span style="color: #2d9574;">"grep"</span><span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">The default package repository used if no explicit repository has been</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">specified with an installed package.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Not used for now. (default nil)</span>
+dotspacemacs-default-package-repository nil
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline52" class="outline-4">
+<h4 id="orgheadline52"><a id="ID-f94c8359-4a45-4ce4-ae2a-72d59197ecbb"></a>Whitespace Cleanup</h4>
+<div class="outline-text-4" id="text-orgheadline52">
+<p>
+I work with source code a lot and I like cleaning up the trailing whitespace
+automatically.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Delete whitespace while saving buffer. Possible values are `</span><span style="color: #a45bad; background-color: #292e34;">all</span><span style="color: #2aa1ae; background-color: #292e34;">'</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">to aggressively delete empty line and long sequences of whitespace,</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">`</span><span style="color: #a45bad; background-color: #292e34;">trailing</span><span style="color: #2aa1ae; background-color: #292e34;">' to delete only the whitespace at end of lines, `</span><span style="color: #a45bad; background-color: #292e34;">changed</span><span style="color: #2aa1ae; background-color: #292e34;">'to</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">delete only whitespace for changed lines or `</span><span style="color: #a45bad; background-color: #292e34;">nil</span><span style="color: #2aa1ae; background-color: #292e34;">' to disable cleanup.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(default nil)</span>
+dotspacemacs-whitespace-cleanup 'trailing
+<span style="color: #e0211d; text-decoration: overline;">))</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline53" class="outline-3">
+<h3 id="orgheadline53"><a id="ID-15e2ff52-d8a2-4a4c-8e8b-f6814546e32e"></a><code>dotspacemacs/user-init</code></h3>
+<div class="outline-text-3" id="text-orgheadline53">
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">defun</span> <span style="color: #bc6ec5; font-weight: bold;">dotspacemacs/user-init</span> <span style="color: #bc6ec5;">()</span>
+  <span style="color: #2aa1ae;">"Initialization function for user code.</span>
+<span style="color: #2aa1ae;">It is called immediately after `</span><span style="color: #a45bad;">dotspacemacs/init</span><span style="color: #2aa1ae;">'.  You are free to put almost</span>
+<span style="color: #2aa1ae;">any user code here.  The exception is org related code, which should be placed</span>
+<span style="color: #2aa1ae;">in `</span><span style="color: #a45bad;">dotspacemacs/user-config</span><span style="color: #2aa1ae;">'."</span>
+  <span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline54" class="outline-4">
+<h4 id="orgheadline54"><a id="ID-ed72b3c8-addd-4909-bc18-fc88318013cc"></a>Function to add unique ID to each entry</h4>
+<div class="outline-text-4" id="text-orgheadline54">
+<p>
+I have this function so that I can add a unique id to each entry in the file. It
+can be obnoxious but my property drawers are folded so its not that intrusive,
+and it does allow for linking to a nodes unique id so that links can remain
+working after re-filing entries into different files. Sometimes I have a save
+hook configured to run this.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">defun</span> <span style="color: #bc6ec5; font-weight: bold;">my/org-add-ids-to-headlines-in-file</span> <span style="color: #bc6ec5;">()</span>
+  <span style="color: #2aa1ae;">"Add ID properties to all headlines in the current file which</span>
+<span style="color: #2aa1ae;">   do not already have one."</span>
+  <span style="color: #bc6ec5;">(</span>interactive<span style="color: #bc6ec5;">)</span>
+  <span style="color: #bc6ec5;">(</span>org-map-entries 'org-id-get-create<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+And that wraps up my <code>dotspacemacs/user-init</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #e0211d; text-decoration: overline;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">End dotspacemacs/user-init</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline55" class="outline-3">
+<h3 id="orgheadline55"><a id="ID-dcfd495c-a8fd-4597-965e-9f29b108d698"></a><code>dotspacemacs/user-config</code></h3>
+<div class="outline-text-3" id="text-orgheadline55">
+<p>
+This is where I put the majority of my custom configuration.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">defun</span> <span style="color: #bc6ec5; font-weight: bold;">dotspacemacs/user-config</span> <span style="color: #bc6ec5;">()</span>
+  <span style="color: #2aa1ae;">"Configuration function for user code.</span>
+<span style="color: #2aa1ae;">This function is called at the very end of Spacemacs initialization after</span>
+<span style="color: #2aa1ae;">layers configuration. You are free to put any user code."</span>
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline56" class="outline-4">
+<h4 id="orgheadline56"><a id="ID-23332d3a-81f2-483f-b4c5-b1406dae0398"></a>Pretty Bullets in org mode</h4>
+<div class="outline-text-4" id="text-orgheadline56">
+<p>
+I like these prettier bullets that I <a href="https://github.com/syl20bnr/spacemacs/tree/master/layers/org#different-bullets">found</a> in the org layer README.
+</p>
+
+<p>
+You should be able to set any utf-8 characters. If your looking for some options
+you might <a href="https://github.com/syl20bnr/spacemacs/tree/master/layers/org#different-bullets">try here</a>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Prettier Bullets for org-mode</span>
+<span style="color: #4f97d7;">(</span>setq org-bullets-bullet-list '<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">"&#9632;"</span> <span style="color: #2d9574;">"&#9670;"</span> <span style="color: #2d9574;">"&#9650;"</span> <span style="color: #2d9574;">"&#9654;"</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline57" class="outline-4">
+<h4 id="orgheadline57"><a id="ID-90cf59fc-7672-42bf-aff0-e675e46fcfab"></a>Fast TODO selection</h4>
+<div class="outline-text-4" id="text-orgheadline57">
+<p>
+This enables fast todo selection to bring up the menu of TODO keywords when
+pressing <code>t</code> on a headline.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #4f97d7;">(</span>setq org-use-fast-todo-selection t<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline58" class="outline-4">
+<h4 id="orgheadline58"><a id="ID-637860b4-2b22-430e-ab57-50e693e5ca2a"></a>Configure TODO Keywords</h4>
+<div class="outline-text-4" id="text-orgheadline58">
+<p>
+This sets up quick access to <code>TODO</code> states. I definitely use <code>TODO</code> and <code>DONE</code>
+but I haven't really found my flow with any other states so this gets messed
+with from time to time.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #cc9393;">TODO</span><span style="color: #2aa1ae; background-color: #292e34;"> Keywords</span>
+<span style="color: #4f97d7;">(</span>setq org-todo-keywords
+      <span style="color: #bc6ec5;">(</span>quote <span style="color: #2d9574;">(</span><span style="color: #67b11d;">(</span>sequence <span style="color: #2d9574;">"</span><span style="color: #cc9393;">TODO</span><span style="color: #2d9574;">(t)"</span> <span style="color: #2d9574;">"IN_PROGRESS(i)"</span> <span style="color: #2d9574;">"|"</span> <span style="color: #2d9574;">"</span><span style="color: #afd8af;">DONE</span><span style="color: #2d9574;">(d)"</span><span style="color: #67b11d;">)</span>
+              <span style="color: #67b11d;">(</span>sequence <span style="color: #2d9574;">"WAITING(w@/)"</span> <span style="color: #2d9574;">"</span><span style="color: #d0bf8f;">HOLD</span><span style="color: #2d9574;">(h@/)"</span> <span style="color: #2d9574;">"|"</span> <span style="color: #2d9574;">"CANCELLED(c@/)"</span><span style="color: #67b11d;">)</span><span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+You might like to have some fancy utf characters in the TODO keywords, but it
+could complicate manual editing (which probably should be avoided anyway).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #cc9393;">TODO</span><span style="color: #2aa1ae; background-color: #292e34;"> Keywords</span>
+<span style="color: #4f97d7;">(</span>setq org-todo-keywords
+      <span style="color: #bc6ec5;">(</span>quote <span style="color: #2d9574;">(</span><span style="color: #67b11d;">(</span>sequence <span style="color: #2d9574;">"&#9755; </span><span style="color: #cc9393;">TODO</span><span style="color: #2d9574;">(t)"</span> <span style="color: #2d9574;">"IN_PROGRESS(i)"</span> <span style="color: #2d9574;">"|"</span> <span style="color: #2d9574;">"&#10004; </span><span style="color: #afd8af;">DONE</span><span style="color: #2d9574;">(d)"</span><span style="color: #67b11d;">)</span>
+              <span style="color: #67b11d;">(</span>sequence <span style="color: #2d9574;">"&#9873; WAITING(w@/)"</span> <span style="color: #2d9574;">"</span><span style="color: #d0bf8f;">HOLD</span><span style="color: #2d9574;">(h@/)"</span> <span style="color: #2d9574;">"|"</span> <span style="color: #2d9574;">"&#10008; CANCELLED(c@/)"</span><span style="color: #67b11d;">)</span><span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline59" class="outline-4">
+<h4 id="orgheadline59"><a id="ID-237543af-c94f-48e4-9cc9-1a18813b2024"></a>Enforce TODO dependencies</h4>
+<div class="outline-text-4" id="text-orgheadline59">
+<p>
+I have <code>TODO=s scattered all over the place. This prevents me from marking an
+entry as =DONE</code> when there are still sub entries that are not <code>DONE</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Avoid setting entries as </span><span style="color: #afd8af;">DONE</span><span style="color: #2aa1ae; background-color: #292e34;"> when there are still sub-entries that are not</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">DONE.</span>
+<span style="color: #4f97d7;">(</span>setq org-enforce-todo-dependencies t<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline60" class="outline-4">
+<h4 id="orgheadline60"><a id="ID-e013010a-f840-4249-a452-ec92a1e19ac9"></a>Capture Templates</h4>
+<div class="outline-text-4" id="text-orgheadline60">
+<p>
+I use the <code>To-do</code> capture all the time. All of the captured TODOs goto the same
+place and then I re-file them into other files later on. Note that I clock time
+during the capture and then automatically resume the previously clocked task
+when I am done capturing.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Configure custom capture templates</span>
+<span style="color: #4f97d7;">(</span>setq org-capture-templates
+    '<span style="color: #bc6ec5;">(</span>
+      <span style="color: #2d9574;">(</span><span style="color: #2d9574;">"t"</span> <span style="color: #2d9574;">"To-do"</span> entry <span style="color: #67b11d;">(</span>file+headline <span style="color: #2d9574;">"~/org/main.org"</span> <span style="color: #2d9574;">"Tasks"</span><span style="color: #67b11d;">)</span>
+       <span style="color: #2d9574;">"** </span><span style="color: #cc9393;">TODO</span><span style="color: #2d9574;"> %^{Task Description}\nCreated From: %a\n"</span> <span style="color: #4f97d7;">:clock-in</span> t <span style="color: #4f97d7;">:clock-resume</span> t <span style="color: #4f97d7;">:prepend</span> t<span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline61" class="outline-4">
+<h4 id="orgheadline61"><a id="ID-d93b3fe2-bcf4-4972-81db-de9b5af1171d"></a>Don't F-up my headline when pressing Alt-RETURN</h4>
+<div class="outline-text-4" id="text-orgheadline61">
+<p>
+You can use alt-return when your on a heading to create a new one below it. If
+your in the middle of the heading, it chops it off and that is really annoying.
+</p>
+
+<p>
+Somewhere I stumbled on this setting in this guys <a href="https://github.com/roman/spacemacs-private-layer/blob/master/zoo/packages.el">private layer</a>. There is some
+other good stuff in there too.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">When hitting alt-return on a header, please create a new one without</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">messing up the one I'm standing on.</span>
+<span style="color: #4f97d7;">(</span>setq org-insert-heading-respect-content t<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline62" class="outline-4">
+<h4 id="orgheadline62"><a id="ID-dc850dae-a43b-4718-ae99-87db4a602e48"></a>Don't let org clock time run amuck</h4>
+<div class="outline-text-4" id="text-orgheadline62">
+<p>
+I try to clock my time. I'm not great about doing it 100% of the time, but
+tracking my time is really useful. Clocktables can be really useful if your good
+about managing the clocked in task.
+</p>
+
+<p>
+With this setting after 30 minutes of idle time I am prompted to see if I want
+to keep or throw away the idle time. I think this really helps my clocking
+accuracy.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Resolve open-clocks if idle more than 30 minutes</span>
+<span style="color: #4f97d7;">(</span>setq org-clock-idle-time <span style="color: #a45bad;">30</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline63" class="outline-4">
+<h4 id="orgheadline63"><a id="ID-e49518d6-6749-466b-b297-2fd7eeb9184b"></a>Hyperlink Abbreviations</h4>
+<div class="outline-text-4" id="text-orgheadline63">
+<p>
+I link to several issue tracking systems frequently, and link abbreviations make
+it much nicer.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Link abbreviations http://orgmode.org/manual/Link-abbreviations.html#Link-abbreviations</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">This makes it easy to create links in org files to common urls</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Note: The actual link is not stored in the text, only when rendered</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Usage: [[zendesk:2753]] or [[redmine:7481][My text]]</span>
+<span style="color: #4f97d7;">(</span>setq org-link-abbrev-alist
+      '<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">(</span><span style="color: #2d9574;">"zendesk"</span> . <span style="color: #2d9574;">"https://cfengine.zendesk.com/agent/tickets/"</span><span style="color: #2d9574;">)</span>
+        <span style="color: #2d9574;">(</span><span style="color: #2d9574;">"redmine"</span> . <span style="color: #2d9574;">"https://dev.cfengine.com/issues/"</span><span style="color: #2d9574;">)</span>
+        <span style="color: #2d9574;">(</span><span style="color: #2d9574;">"jira"</span> . <span style="color: #2d9574;">"https://tracker.mender.io/browse/"</span><span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline64" class="outline-4">
+<h4 id="orgheadline64"><a id="ID-960c9549-dd3c-41d0-9bb1-97d562c659a2"></a>Rendering in-line images by default</h4>
+<div class="outline-text-4" id="text-orgheadline64">
+<p>
+I now do the majority of my writing in org-mode. Sometimes I include images.
+This makes them render in-line by default. I might switch this back off. It's
+nice but I have found it makes navigating documents more difficult when images
+are displayed inline.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">; </span><span style="color: #2aa1ae; background-color: #292e34;">Enable automatic inline image rendering</span>
+<span style="color: #2aa1ae; background-color: #292e34;">; </span><span style="color: #2aa1ae; background-color: #292e34;">http://orgmode.org/manual/In_002dbuffer-settings.html</span>
+<span style="color: #4f97d7;">(</span>setq org-startup-with-inline-images t<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline65" class="outline-4">
+<h4 id="orgheadline65"><a id="ID-2c254b06-0d0a-4d9e-a150-5a83a143c149"></a>Agenda Files</h4>
+<div class="outline-text-4" id="text-orgheadline65">
+<p>
+I consider myself quite unorganized. At least inside my head it feels that way.
+Org mode really helps me because it can search across multiple files. So I can
+have as many different files as I like for different projects or clients and
+then I can search across all of them for something using the agenda view. This
+specifies each of your org files, or the directories to be searched for org
+files.
+</p>
+
+<p>
+For this presentation I just point to the directory that contains my git clone.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Set the org-agenda files</span>
+<span style="color: #4f97d7;">(</span>setq org-agenda-files
+  '<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">"~/src/presentations/Level-up-your-notes-with-Org"</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline66" class="outline-4">
+<h4 id="orgheadline66"><a id="ID-6a1d2468-00e4-40ce-97e6-bb4a8908588b"></a>Refile Targets</h4>
+<div class="outline-text-4" id="text-orgheadline66">
+<p>
+When I refile, I want to be able to go up to 5 levels deep. Probably I could
+take this down a notch or two. Usually I am only filing 1 or 2 levels deep.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Set refile locations to whats in org-agenda</span>
+<span style="color: #4f97d7;">(</span>setq org-refile-targets <span style="color: #bc6ec5;">(</span>quote <span style="color: #2d9574;">(</span><span style="color: #67b11d;">(</span>org-agenda-files <span style="color: #4f97d7;">:maxlevel</span> . <span style="color: #a45bad;">5</span><span style="color: #67b11d;">)</span><span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline67" class="outline-4">
+<h4 id="orgheadline67"><a id="ID-8e446d96-5cbb-4e9a-bed5-898d1cfe5908"></a>Automatic Visual Indention</h4>
+<div class="outline-text-4" id="text-orgheadline67">
+<p>
+I picked this up from a co-worker. Before I started using this setting I was
+managing whitespace indentation inside my org files. Now its all indented
+automatically but the source itself is not indented.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Keep the indentation well structured by. OMG this is a must have. Makes</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">it feel less like editing a big text file and more like a purpose built</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">editor for org mode that forces the indentation.</span>
+<span style="color: #4f97d7;">(</span>setq org-startup-indented t<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline68" class="outline-4">
+<h4 id="orgheadline68"><a id="ID-6b2c6c91-06f2-4735-951a-35bbf42d3582"></a>Zooming Text</h4>
+<div class="outline-text-4" id="text-orgheadline68">
+<p>
+Add these keys in to support familiar zooming of text with <code>Ctrl+</code> and <code>Ctrl-</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Familiar zooming with Ctrl+ and Ctrl-</span>
+<span style="color: #4f97d7;">(</span>define-key global-map <span style="color: #bc6ec5;">(</span>kbd <span style="color: #2d9574;">"C-+"</span><span style="color: #bc6ec5;">)</span> 'text-scale-increase<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7;">(</span>define-key global-map <span style="color: #bc6ec5;">(</span>kbd <span style="color: #2d9574;">"C--"</span><span style="color: #bc6ec5;">)</span> 'text-scale-decrease<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline69" class="outline-4">
+<h4 id="orgheadline69"><a id="ID-3e314939-66f1-406d-b744-2120277e36ee"></a>Custom Key bindings</h4>
+<div class="outline-text-4" id="text-orgheadline69">
+<p>
+Spacemacs reserves <code>SPC o</code> and <code>SPC m o</code> for user defined key bindings.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #4f97d7;">(</span>spacemacs/set-leader-keys
+ <span style="color: #2d9574;">"oc"</span> 'org-capture
+ <span style="color: #2d9574;">"oa"</span> 'org-agenda<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline70" class="outline-4">
+<h4 id="orgheadline70"><a id="ID-b755c45a-7e0c-460c-bf89-1df09cc6fdcd"></a>Automatically generate unique IDs on save</h4>
+<div class="outline-text-4" id="text-orgheadline70">
+<p>
+Internal links can get broken when you refile entries. This hook makes sure that
+each capture gets a unique id. Using the ID property for linking can help to
+keep links functional when refiling.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">  <span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">This makes sure that each captured entry gets a unique ID</span>
+<span style="color: #4f97d7;">(</span>add-hook 'org-capture-prepare-finalize-hook 'org-id-get-create<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline71" class="outline-4">
+<h4 id="orgheadline71"><a id="ID-ba119af1-12de-40bc-91b0-063334faf19b"></a>Code block execution support</h4>
+<div class="outline-text-4" id="text-orgheadline71">
+<p>
+This is where you add support for <a href="http://orgmode.org/worg/org-contrib/babel/languages.html">specific languages</a> in 'src' code blocks.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #4f97d7;">(</span>org-babel-do-load-languages
+ 'org-babel-load-languages
+ '<span style="color: #bc6ec5;">(</span>
+   <span style="color: #2d9574;">(</span>sh . t<span style="color: #2d9574;">)</span>
+   <span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+Here I have a hook to automatically add unique IDs to each entry on save.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline72" class="outline-4">
+<h4 id="orgheadline72"><a id="ID-ef5d3bef-8f62-41de-a427-cd8df71b0a98"></a>Auto save hooks</h4>
+<div class="outline-text-4" id="text-orgheadline72">
+<p>
+I used to have auto save configured as well for all agenda files, but I ran into
+some perform acne issues with some of my large (30k line) org files.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">AUTOMATICLALLY CREATE IDS for all nodes in org mode file on save. This</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">helps when you use link to an entry and then it is moved to a different</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">file.</span>
+<span style="color: #4f97d7;">(</span>add-hook 'org-mode-hook
+          <span style="color: #bc6ec5;">(</span><span style="color: #4f97d7; font-weight: bold;">lambda</span> <span style="color: #2d9574;">()</span>
+            <span style="color: #2d9574;">(</span>add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local<span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">auto save agenda I ran into some performance issues when this is combined</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">with adding ids to headlines. This seemed to be mostly related to some</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">large (30k line) org files.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;</span><span style="color: #2aa1ae; background-color: #292e34;">(add-hook 'org-agenda-mode-hook</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;          </span><span style="color: #2aa1ae; background-color: #292e34;">(lambda ()</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;            </span><span style="color: #2aa1ae; background-color: #292e34;">(add-hook 'auto-save-hook 'org-save-all-org-buffers nil t)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;            </span><span style="color: #2aa1ae; background-color: #292e34;">(auto-save-mode)))</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline73" class="outline-4">
+<h4 id="orgheadline73"><a id="ID-e0a740d8-433b-432f-b375-97471c1a5435"></a>Keeping Secrets Encrypted</h4>
+<div class="outline-text-4" id="text-orgheadline73">
+<p>
+Some things in my notes need to be kept secret. This allows me to tag entries
+with <code>crypt</code> to have them encrypted with my gpg key.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">http://yenliangl.blogspot.com/2009/12/encrypt-your-important-data-in-emacs.html</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">http://emacs-fu.blogspot.com/2011/02/keeping-your-secrets-secret.html</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">This allows me to encrypt subtrees that are tagged with crypt automatically.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">by default I want to encrypt it to myself. but with properties entries I cna encrypt to other people. which is useful in a shared file situation</span>
+<span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">require</span> '<span style="color: #a45bad;">org-crypt</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Automatically re-encrypt entries on save to avoid leaking decrypted</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">information.</span>
+<span style="color: #4f97d7;">(</span>org-crypt-use-before-save-magic<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7;">(</span>setq org-crypt-disable-auto-save <span style="color: #bc6ec5;">(</span>quote encrypt<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">GPG key to use for encryption</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Either the Key ID or set to nil to use symmetric encryption.</span>
+<span style="color: #4f97d7;">(</span>setq org-crypt-key <span style="color: #2d9574;">"5D1CCC11"</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">This prevents the crypt tag from being included in inheritance.</span>
+<span style="color: #4f97d7;">(</span>setq org-tags-exclude-from-inheritance <span style="color: #bc6ec5;">(</span>quote <span style="color: #2d9574;">(</span><span style="color: #2d9574;">"crypt"</span><span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline74" class="outline-4">
+<h4 id="orgheadline74"><a id="ID-fc0035b0-4b54-4ee1-b577-2612513b2a68"></a>Initalize other packages</h4>
+<div class="outline-text-4" id="text-orgheadline74">
+<p>
+And finally require some of the additional packages that I use.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Export to jira markup for more beautiful issue comments</span>
+<span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">require</span> '<span style="color: #a45bad;">ox-jira</span><span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Export to markdown for more beautiful comments in zendesk</span>
+<span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">require</span> '<span style="color: #a45bad;">ox-md</span><span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">So that I can make presentations in org and display them with the beautiful</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">reveal.js</span>
+<span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">require</span> '<span style="color: #a45bad;">ox-reveal</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+And finally, we reach the end.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #e0211d; text-decoration: overline;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">End dotspacemacs/user-config</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Nick Anderson</p>
+<p class="date">Created: 2016-05-18 Wed 15:51</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

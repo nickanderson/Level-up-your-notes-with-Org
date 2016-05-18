@@ -1,0 +1,8 @@
+#+Title: Level up your notes with Org
+
+This presentation was written in Org (no surprise there).
+
+It explains how I use spacemacs to improve my ninja note taking abilities. The
+configuration needed for spacemaces has been tangled out of the presentation
+into [[./dot-spacemacs][=dot-spacemacs=]].
+
