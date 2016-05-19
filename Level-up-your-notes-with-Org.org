@@ -101,7 +101,7 @@ Then install spacemacs (I assume you already have Emacs installed).
 - To open the installed dotfile:
 
   #+BEGIN_EXAMPLE
-  <SPC> f e d
+    <SPC> f e d
   #+END_EXAMPLE
 
 *Note:* The =.spacemacs= used for this presentation is documented at the end of
@@ -122,12 +122,12 @@ Then install spacemacs (I assume you already have Emacs installed).
 Enable the =org= layer in =dotspacemacs/layers=.
 
 #+BEGIN_SRC elisp
-(defun dotspacemacs/layers ()
-  "Configuration Layers declaration.
-You should not put any user code in this function besides modifying the variable
-values."
-  (setq-default
-   dotspacemacs-configuration-layers '( org )))
+  (defun dotspacemacs/layers ()
+    "Configuration Layers declaration.
+  You should not put any user code in this function besides modifying the variable
+  values."
+    (setq-default
+     dotspacemacs-configuration-layers '( org )))
 #+END_SRC
 
 #+BEGIN_NOTES
@@ -178,8 +178,9 @@ Tell org where you keep your notes. Make sure this presentation is included!
 :ID:       7d103e08-0d1f-40e3-8157-924cc5437660
 :END:
 
-In Org each entry is simply a line starting with one or more =*=. To insert a
-new headline after the current one type =<comma> h i=.
+- An entry is a line starting with one or more =*=
+- Insert a new headline after the current one by typing =<comma> h i=
+
 ** Capture a new TODO (or other standard type of entry)
 :PROPERTIES:
 :ID:       d686855a-e312-45e8-b9ce-7019020079fc
@@ -244,7 +245,7 @@ utilities like [[http://geoff.greer.fm/ag/][=ag=]], [[http://beyondgrep.com][=ac
 :ID:       64e115d7-2237-4d4a-81a3-22a242fb936e
 :END:
 
-This is a good way to keep from being distracted. 
+This is a good way to keep from being distracted.
 
 - =org-narrow-to-subtree= =<comma> n=
 - =widen= =<comma> N=
@@ -267,9 +268,9 @@ CLOCK: [2016-05-18 Wed 15:35]--[2016-05-18 Wed 15:47] =>  0:12
 
 Org has its own markup syntax which is *really* beneficial for exporting.
 
-- Markup your text, you will thank me later
-- This is *key to getting compliments*
- 
+- Markup your text. You will thank me later.
+- This is *key to getting compliments*.
+
 #+BEGIN_NOTES
 Really, spend the time to mark up the text.
 #+END_NOTES
@@ -280,9 +281,9 @@ Really, spend the time to mark up the text.
 :END:
 
 #+BEGIN_SRC text
-You can make words *bold*, /italic/, _underlined_, =verbatim= and ~code~, and,
-if you must, '+strike-through+'. Text in the code and verbatim string is not
-processed for Org mode specific syntax, it is exported verbatim.
+  You can make words *bold*, /italic/, _underlined_, =verbatim= and ~code~, and,
+  if you must, '+strike-through+'. Text in the code and verbatim string is not
+  processed for Org mode specific syntax, it is exported verbatim.
 #+END_SRC
 
 You can make words *bold*, /italic/, _underlined_, =verbatim= and ~code~, and,
@@ -303,9 +304,9 @@ commands.
 :END:
 
 #+BEGIN_EXAMPLE
-#+BEGIN_QUOTE
-Clever remark -- me
-#+END_QUOTE
+  #+BEGIN_QUOTE
+  Clever remark -- me
+  #+END_QUOTE
 #+END_EXAMPLE
 
 #+BEGIN_QUOTE
@@ -320,9 +321,9 @@ Clever remark -- me
 :END:
 
 #+BEGIN_SRC text
-#+BEGIN_EXAMPLE
-Are useful for rendering mutlilne blocks verbatim.
-#+END_EXAMPLE
+  #+BEGIN_EXAMPLE
+  Are useful for rendering mutlilne blocks verbatim.
+  #+END_EXAMPLE
 #+END_SRC
 
 #+BEGIN_EXAMPLE
@@ -339,19 +340,19 @@ Are useful for rendering mutlilne blocks verbatim.
 Source code can be included in Org mode documents using a 'src' block.
 
 #+BEGIN_EXAMPLE
-#+BEGIN_SRC cfengine3
-bundle agent main {
-  reports: "Hello World!";
-}
-#+END_SRC
+  #+BEGIN_SRC cfengine3
+  bundle agent main {
+    reports: "Hello World!";
+  }
+  #+END_SRC
 #+END_EXAMPLE
 
 They render nicely when exported
 
 #+BEGIN_SRC cfengine3
-bundle agent main {
-  reports: "Hello World!";
-}
+  bundle agent main {
+    reports: "Hello World!";
+  }
 #+END_SRC
 
 *Note:* Try typing =<s= followed by the =<TAB>= key. Many languages are supported.
@@ -364,7 +365,7 @@ bundle agent main {
 You can link to [[Emphasis and monospace][other nodes in a document]] or to [[http://lmgtfy.com][external places]].
 
 #+BEGIN_EXAMPLE
-You can link to [[Emphasis and monospace][other nodes in a document]] or to [[http://lmgtfy.com][external places]].
+  You can link to [[Emphasis and monospace][other nodes in a document]] or to [[http://lmgtfy.com][external places]].
 #+END_EXAMPLE
 
 *=[[TARGET] [TEXT]]=*
@@ -376,7 +377,7 @@ You can link to [[Emphasis and monospace][other nodes in a document]] or to [[ht
 Worth a thousand words
 
 #+BEGIN_EXAMPLE
-[[./media/best-nyan-cat-gif-963.gif]]
+  [[./media/best-nyan-cat-gif-963.gif]]
 #+END_EXAMPLE
 
 [[./media/best-nyan-cat-gif-963.gif]]
@@ -387,9 +388,9 @@ Worth a thousand words
 :END:
 
 #+BEGIN_EXAMPLE
-| Tables | Are     |
-|--------+---------|
-| easy   | to make |
+  | Tables | Are     |
+  |--------+---------|
+  | easy   | to make |
 #+END_EXAMPLE
 
 | Tables | Are     |
@@ -430,9 +431,9 @@ Some languages support executing code blocks. Try placing the insertion point
 within the code block and typing =<comma> <comma>=.
 
 #+BEGIN_EXAMPLE
-#+BEGIN_SRC sh :exports both :wrap EXAMPLE
-  /bin/echo "Hello $(date)"
-#+END_SRC
+  #+BEGIN_SRC sh :exports both :wrap EXAMPLE
+    /bin/echo "Hello $(date)"
+  #+END_SRC
 #+END_EXAMPLE
 
 #+BEGIN_SRC sh :exports results :wrap EXAMPLE
@@ -443,7 +444,7 @@ Execution results can be exported.
 
 #+RESULTS:
 #+BEGIN_EXAMPLE
-Hello Tue May 17 16:48:07 CDT 2016
+  Hello Tue May 17 16:48:07 CDT 2016
 #+END_EXAMPLE
 ** Execute code blocks on remote hosts with Tramp
 :PROPERTIES:
@@ -451,9 +452,9 @@ Hello Tue May 17 16:48:07 CDT 2016
 :END:
 
 #+BEGIN_EXAMPLE
-#+BEGIN_SRC sh :exports both :wrap EXAMPLE :dir /ssh:user@example.host.tld:
-  hostname
-#+END_SRC
+  #+BEGIN_SRC sh :exports both :wrap EXAMPLE :dir /ssh:user@example.host.tld:
+    hostname
+  #+END_SRC
 #+END_EXAMPLE
 
 #+BEGIN_SRC sh :exports results :wrap EXAMPLE :dir /ssh:user@example.host.tld:
@@ -462,7 +463,7 @@ Hello Tue May 17 16:48:07 CDT 2016
 
 #+RESULTS:
 #+BEGIN_EXAMPLE
-example.host.tld
+  example.host.tld
 #+END_EXAMPLE
 * Getting Compliments
 :PROPERTIES:
@@ -491,7 +492,9 @@ Comments like these are a regular occurrence.
 
 Exporting your notes makes *all* the difference.
 
-** Exporting to HTML 
+Type =<comma> e= or =: org-export-dispatch= to launch the export menu.
+
+** Exporting to HTML
 :PROPERTIES:
 :ID:       fb06919e-95f2-41f1-ae35-aedf3be98879
 :END:
@@ -502,7 +505,7 @@ versions of your notes check out [[https://github.com/fniessen/org-html-themes][
 I like readtheorg.
 
 #+BEGIN_EXAMPLE
-#+SETUPFILE: ~/src/org-html-themes/setup/theme-readtheorg.setup
+  #+SETUPFILE: ~/src/org-html-themes/setup/theme-readtheorg.setup
 #+END_EXAMPLE
 
 ** Exporting for Presentations
@@ -539,7 +542,7 @@ If you are good about tracking your time and you have a PHB, checkout
 | \_  Clocktables for the PHB |        | 0:02 |
 #+END:
 
-* Summary Tips 
+* Summary Tips
 :PROPERTIES:
 :ID:       cae8144c-44ec-475d-aa3a-bf7f213b1226
 :END:
