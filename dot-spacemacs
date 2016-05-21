@@ -283,11 +283,37 @@ layers configuration. You are free to put any user code."
 ;; DONE.
 (setq org-enforce-todo-dependencies t)
 
-;; Configure custom capture templates
-(setq org-capture-templates
-    '(
-      ("t" "To-do" entry (file+headline "~/org/main.org" "Tasks")
-       "** TODO %^{Task Description}\nCreated From: %a\n" :clock-in t :clock-resume t :prepend t)))
+;; I picked up this neat trick from the Venerable Sacha Chua
+  (defvar my/org-meeting-template "** Meeting about %^{something}
+SCHEDULED: %<%Y-%m-%d %H:%M>
+
+*Attendees:*
+
+- [X] Nick Anderson
+- [ ] %?
+
+
+*Agenda:*
+-
+-
+
+*Notes:*
+
+
+" "Meeting Template")
+
+
+  ;; Configure custom capture templates
+  (setq org-capture-templates
+      `(;; Note the backtick here, it's required so that the defvar based tempaltes will work!
+        ;;http://comments.gmane.org/gmane.emacs.orgmode/106890
+
+        ("t" "To-do" entry (file+headline "~/org/main.org" "Tasks")
+         "** TODO %^{Task Description}\nCreated From: %a\n" :clock-in t :clock-resume t :prepend t)
+
+        ("m" "Meeting" entry (file+headline "~/org/cfengine/cfengine.org" "Meeting Notes")
+         ,my/org-meeting-template)
+))
 
 ;; When hitting alt-return on a header, please create a new one without
 ;; messing up the one I'm standing on.
@@ -311,7 +337,7 @@ layers configuration. You are free to put any user code."
 
 ;; Set the org-agenda files
 (setq org-agenda-files
-  '("~/src/presentations/Level-up-your-notes-with-Org"))
+  '("~/src/presentations/Level-up-your-notes-with-Org/Level-up-your-notes-with-Org.org"))
 
 ;; Set refile locations to whats in org-agenda
 (setq org-refile-targets (quote ((org-agenda-files :maxlevel . 5))))

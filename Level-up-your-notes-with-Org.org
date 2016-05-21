@@ -564,7 +564,6 @@ SCHEDULED: <2016-05-21 Sat>
 :PROPERTIES:
 :ID:       4c4b5abb-810c-4961-9c12-9c9edccd6a22
 :END:
-
 * DONE Document =.spacemacs=
 CLOSED: [2016-05-18 Wed 14:27] SCHEDULED: <2016-05-18 Wed>
 :PROPERTIES:
@@ -967,7 +966,6 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 #+END_SRC
 
-
 *** Pretty Bullets in org mode
 :PROPERTIES:
 :ID:       23332d3a-81f2-483f-b4c5-b1406dae0398
@@ -1041,16 +1039,46 @@ entry as =DONE= when there are still sub entries that are not =DONE=.
 :END:
 
 I use the =To-do= capture all the time. All of the captured TODOs goto the same
-place and then I re-file them into other files later on. Note that I clock time
-during the capture and then automatically resume the previously clocked task
-when I am done capturing.
+place and then I re-file them (Rarely, but I'm trying to get better about it.
+There is a slight pain factor involved at times when a single org file gets up
+to 30K lines) into other files later on. Note that I clock time during the
+capture and then automatically resume the previously clocked task when I am done
+capturing.
+
+I keep trying other templates.
 
 #+BEGIN_SRC elisp :tangle dot-spacemacs
+  ;; I picked up this neat trick from the Venerable Sacha Chua
+  (defvar my/org-meeting-template "** Meeting about %^{something}
+SCHEDULED: %<%Y-%m-%d %H:%M>
+
+*Attendees:*
+
+- [X] Nick Anderson
+- [ ] %?
+
+
+*Agenda:*
+-
+-
+
+*Notes:*
+
+
+" "Meeting Template")
+
+
   ;; Configure custom capture templates
   (setq org-capture-templates
-      '(
+      `(;; Note the backtick here, it's required so that the defvar based tempaltes will work!
+        ;;http://comments.gmane.org/gmane.emacs.orgmode/106890
+
         ("t" "To-do" entry (file+headline "~/org/main.org" "Tasks")
-         "** TODO %^{Task Description}\nCreated From: %a\n" :clock-in t :clock-resume t :prepend t)))
+         "** TODO %^{Task Description}\nCreated From: %a\n" :clock-in t :clock-resume t :prepend t)
+
+        ("m" "Meeting" entry (file+headline "~/org/cfengine/cfengine.org" "Meeting Notes")
+         ,my/org-meeting-template)
+))
 #+END_SRC
 
 *** Don't F-up my headline when pressing Alt-RETURN
@@ -1140,7 +1168,7 @@ For this presentation I just point to the directory that contains my git clone.
 #+BEGIN_SRC elisp :tangle dot-spacemacs
   ;; Set the org-agenda files
   (setq org-agenda-files
-    '("~/src/presentations/Level-up-your-notes-with-Org"))
+    '("~/src/presentations/Level-up-your-notes-with-Org/Level-up-your-notes-with-Org.org"))
 #+END_SRC
 
 *** Refile Targets
@@ -1302,4 +1330,43 @@ And finally, we reach the end.
 #+BEGIN_SRC elisp :tangle dot-spacemacs
 )
 ;; End dotspacemacs/user-config
+#+END_SRC
+
+* Spacemacs to Emacs Key Binding Map
+:PROPERTIES:
+:ID:       c776e84a-1242-4624-9d41-37fdecd62648
+:END:
+
+Thanks to @BasementTrix for sending me these translations.
+
+  | spacemacs     | emacs           | function                 |
+  |---------------+-----------------+--------------------------|
+  | =<comma> h i= | =<M-return>=    | org-meta-return          |
+  | =<comma> c t= | =C-c r t=       | org-capture              |
+  | =<comma> :=   | =C-c t=         | org-set-tags             |
+  | =<comma> a=   | =C-c r a=       | org-agenda               |
+  | =<comma> a m= | =C-c r m=       | org-agenda               |
+  | =<comma> n=   | =C-x n s=       | org-narrow-to-subtree    |
+  | =<comma> N=   | =C-x n w=       | widen                    |
+  | =<comma> I=   | =C-c C-x <tab>= | org-clock-in             |
+  | =<comma> O=   | =C-C C-x p=     | org-clock-out            |
+  | =:=           | =M-x=           | execute-extended-command |
+  |               | =C-c C-x C-r=   | org-clock-report         |
+
+#+BEGIN_SRC elisp
+  (global-set-key "\C-c SPC"  'org-clock-in-last)
+  (global-set-key "\C-ca"     'org-agenda)
+  (global-set-key "\C-cb"     'org-iswitchb)
+  (global-set-key "\C-ccd"    'org-time-stamp-inactive)
+  (global-set-key "\C-cct"    'org-toggle-timestamp-type)
+  (global-set-key "\C-ccg"    'org-clock-goto)
+  (global-set-key "\C-cct"    'org-toggle-timestamp-type)
+  (global-set-key "\C-cgd"    'epa-decrypt-region)
+  (global-set-key "\C-cge"    'epa-encrypt-region)
+  (global-set-key "\C-ci"     'org-clock-in)
+  (global-set-key "\C-cl"     'org-store-link)
+  (global-set-key "\C-co"     'org-clock-out)
+  (global-set-key "\C-cr"     'org-capture)
+  (global-set-key "\C-ct"     'org-set-tags)
+  (global-set-key "\C-xg"     'goto-line)
 #+END_SRC
