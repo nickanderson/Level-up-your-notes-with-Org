@@ -32,6 +32,16 @@ authoring documents with a fast and effective plain text system. --
 http://orgmode.org/
 #+END_QUOTE
 
+** Fork me on Github
+:PROPERTIES:
+:ID:       f085a456-13c4-42df-b0c3-4582619ea49b
+:END:
+
+You can get a copy of this presentation any time on Github.
+
+<http://github.com/nickanderson/Level-up-your-notes-with-Org>
+
+
 * Getting started with Spacemacs
 :PROPERTIES:
 :ID:       7c5bc67e-ec60-4085-b5e9-9d1a4b061188
